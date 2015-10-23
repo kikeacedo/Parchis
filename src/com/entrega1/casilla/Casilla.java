@@ -4,14 +4,14 @@ public abstract class Casilla {
 
 	/** ATRIBUTOS **/
 	
-	private Casilla[] fichas;
+	private int[] fichas;
 	private int num_fichas;
 	private int numeroCasilla;
 	
 	/** METODOS **/
 
 	public Casilla(int numeroCasilla){
-		fichas = new Casilla[2];
+		fichas = new int[2];
 		this.numeroCasilla = numeroCasilla;
 	}//constructor
 	
@@ -37,12 +37,12 @@ public abstract class Casilla {
 	 * @return TRUE si se ha metido la ficha
 	 * 		   FALSE si no se ha podido meter
 	 */
-	public boolean meterFicha(Casilla ficha){
+	public boolean meterFicha(int jugador){
 		boolean metida = false;
 		
 		for(int i = 0; i < fichas.length && !metida; i++){
-			if(fichas[i] == null){
-				fichas[i] = ficha;
+			if(fichas[i] < 0){
+				fichas[i] = jugador;
 				metida = true;
 				num_fichas++;
 			}//if
@@ -57,12 +57,12 @@ public abstract class Casilla {
 	 * @return TRUE si se ha sacado la ficha
 	 * 		   FALSE si no se ha podido sacar
 	 */
-	public boolean sacarFicha(Casilla ficha){
+	public boolean sacarFicha(int jugador){
 		boolean sacada = false;
 		
 		for(int i = 0; i < fichas.length && !sacada; i++){
-			if(fichas[i] == ficha){
-				fichas[i] = null;
+			if(fichas[i] == jugador){
+				fichas[i] = -1;
 				sacada = true;
 				num_fichas--;
 			}//if

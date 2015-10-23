@@ -7,6 +7,7 @@ public class Juez {
 	 */
 	
 	private static Juez miJuez;
+	private static int numero_jugador;
 
 	
 	private Juez(){};
@@ -27,7 +28,7 @@ public class Juez {
 	 * @return num_jugador del siguiente turno
 	 */
 	public int elegirJugador(){
-		return 0;
+		return 0;//(int) (Math.random()*3);
 	}//elegirJugador
 	
 

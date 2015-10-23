@@ -8,7 +8,7 @@ public class Game {
 	
 		Parchis parchis = Parchis.getParchis();
 		
-		parchis.setJugadores(4);
+		parchis.setJugadores(1);
 		parchis.iniciarRecorrido();
 		parchis.iniciarJugadores();
 		
