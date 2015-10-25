@@ -77,4 +77,14 @@ public abstract class Casilla {
 		return numeroCasilla;
 	}
 	
+	public int getFicha(){
+		int ficha;
+		if(fichas[0] != -1)
+			ficha = fichas[0];
+		else
+			ficha = fichas[1];
+		
+		return ficha;
+	}//getFicha
+	
 }//class

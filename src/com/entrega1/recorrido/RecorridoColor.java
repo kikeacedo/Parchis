@@ -11,7 +11,18 @@ public class RecorridoColor extends Recorrido{
 		}//for
 
 		casillas[7] = new CasillaMeta(7);
-		
+
 	}//inicializarRecorrido
+
+	@Override
+	public boolean meterFicha(int num_jugador, int num_casilla) {
+		return false;
+	}
+
+	@Override
+	public boolean sacarFicha(int num_jugador, int num_casilla) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }//class

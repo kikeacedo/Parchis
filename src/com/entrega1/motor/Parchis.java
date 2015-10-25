@@ -6,16 +6,16 @@ import com.entrega1.recorrido.*;
 public class Parchis {
 	/** ATRIBUTOS **/
 	
-	private static Jugador[] jugadores;
-	private static Recorrido recorridoPrincipal;
-	private static Recorrido recorridoFinal;
-	private static int num_jugadores;
-	private static final int num_jugadores_tablero = 4;
-	private static Juez juez;
-	private static  Dado dado;
+	private Jugador[] jugadores;
+	private Recorrido recorridoPrincipal;
+	private Recorrido recorridoFinal;
+	private int num_jugadores;
+	private final int num_jugadores_tablero = 4;
+	private Juez juez;
+	private Dado dado;
 	private static Parchis miParchis;
-	private static final int numeroCarasDado = 6;
-	private static boolean juegoTerminado = false;
+	private final int numeroCarasDado = 6;
+	private boolean juegoTerminado = false;
 	
 	/**
 	 * En esta clase utilizamos el patron de construccion Singleton para que solo pueda haber una instancia de Parchis
@@ -43,24 +43,38 @@ public class Parchis {
 			jugadorActual = jugadores[juez.elegirJugador()];
 			
 			// El jugador mueve ficha con el resultado de tirar dado
+			
 			jugadorActual.moverFicha(dado.tirarDado());
 			
 			imprimirSituacion();
 		}//whilePrincipal
 	}//
 	
+	public void mandarFichaCasa(int numeroCasilla, int jugador) {
+		int[] fichas_aux = jugadores[jugador].getFichas();
+		
+		for(int i = 0; i < fichas_aux.length; i++){
+			if(fichas_aux[i] == numeroCasilla){
+				fichas_aux[i] = 0;
+			}//if
+		}//for
+		
+	}//mandarFichaCasa
+	
 	/**
 	 * Metodo que crea los jugadores y sus fichas y las inicializa
 	 */
 	public void iniciarJugadores(){
 		jugadores = new Jugador[num_jugadores];
-		int[] fichas_inicial ={0,0,0,0};
 
 		for(int i = 0; i < num_jugadores; i++){
+			int[] fichas_inicial ={0,0,0,0};
 			jugadores[i] = new Jugador(Color.getColor(i), i);
-			jugadores[i].setCasillaInicial(i*17+5);
+			jugadores[i].setCasillaInicial(17*i + 5);
+			jugadores[i].setCasillaFinal((i==0)?68:i*17);
 			jugadores[i].setFichas(fichas_inicial);
-//			System.out.println("jugador " + i + " casilla inicial " + jugadores[i].getCasillaInicial());
+			
+//			System.out.println("jugador " + i + " casilla inicial " + jugadores[i].getCasillaInicial()+ " casilla final " + jugadores[i].getCasillaFinal());
 		}//for
 	}//iniciarJugadores
 	
@@ -79,7 +93,7 @@ public class Parchis {
 	 * Establece el numero de jugadores de la partida.
 	 * @param num Numero de jugadores
 	 */
-	public void setJugadores(int num){
+	public void setNumJugadores(int num){
 		num_jugadores = num;
 	}//setJugadores
 	
@@ -116,6 +130,7 @@ public class Parchis {
 		
 		return miParchis;
 	}//getParchis
+
 
 }//class
 

@@ -8,13 +8,13 @@ public class Game {
 	
 		Parchis parchis = Parchis.getParchis();
 		
-		parchis.setJugadores(1);
+		parchis.setNumJugadores(4);
 		parchis.iniciarRecorrido();
 		parchis.iniciarJugadores();
 		
 		parchis.start();
 		
-		parchis.imprimirSituacion();
+//		parchis.imprimirSituacion();
 
 	}//main
 }//class

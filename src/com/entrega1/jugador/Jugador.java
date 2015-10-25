@@ -18,38 +18,52 @@ public class Jugador {
 		fichas = new int[4];
 	}//constructor
 	
+	
+	/**
+	 * Si NO HAY fichas en juego:
+	 *  - comprueba que se pueda sacar ficha
+	 *  - saca ficha
+	 * Si HAY fichas en juego:
+	 * 	- coge la ficha mas retrasada
+	 * @param tirada (numero que ha sacado en el dado)
+	 * @return TRUE si ha podido mover; FALSE en caso contrario
+	 */
 	public boolean moverFicha(int tirada){
 		boolean movida = false;
 		
 		if(sacarFicha() && tirada == 5 && !movida){
-			for(int i = 0; i < this.fichas.length && !movida; i++){
-				if(this.fichas[i] == 0){
-					this.fichas[i] = casillaInicial;
+			for(int i = 0; i < fichas.length && !movida; i++){
+				if(fichas[i] == 0){
+					fichas[i] = fichas[i] + casillaInicial;
+					
 					movida = true;
 				}//if
 			}//for
 		}//if
 		
-		if(!movida){
-			int pos_mejor_ficha = 0;
+		if(!movida && fichasEnTablero() > 0){
 			int mejor_ficha = fichas[0];
-			System.out.println(fichas[0] +" " + fichas[3]);
-			for(int i = 1; i < this.fichas.length && !movida; i++){
-				if(this.fichas[i] < pos_mejor_ficha){
+			int pos_mejor_ficha = 0;
+
+			for(int i = 0; i < fichas.length && !movida; i++){
+				if(fichas[i] < pos_mejor_ficha && fichas[i] + tirada < casillaFinal){
 					mejor_ficha = fichas[i];
 					pos_mejor_ficha = i;
 				}//if
 			}//for
 			
 			fichas[pos_mejor_ficha] = fichas[pos_mejor_ficha] + tirada;
-			
-			
 		}//if
 		
 		return movida;
 	}//moverFicha
 	
-	public boolean sacarFicha(){
+	
+	/**
+	 * Puede sacar ficha si hay alguna ficha en casa y no hay 2 fichas en la casilla de salida
+	 * @return TRUE si puede sacar ficha. FALSE en caso contrario
+	 */
+	private boolean sacarFicha(){
 		int num_fichas_casa = 0;
 		int num_fichas_salida = 0;
 		
@@ -63,6 +77,22 @@ public class Jugador {
 		
 		return num_fichas_casa > 0 && num_fichas_salida < 2;
 	}//hayFichaEnCasa
+	
+	/**
+	 * 
+	 * @return numero de fichas en el tablero
+	 */
+	private int fichasEnTablero(){
+		int fichas_aux = 0;
+		
+		for(int i = 0; i <  this.fichas.length; i++){
+			if(fichas[i] >= casillaInicial)
+				fichas_aux++;
+		}//for
+		
+		return fichas_aux;
+		
+	}//fichasEnTablero
 	
 
 	/** GETTERS AND SETTERS **/
