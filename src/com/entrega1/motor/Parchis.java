@@ -31,7 +31,7 @@ public class Parchis {
 	 */
 	public void start(){
 		// Creamos un juez y un dado para este juego 
-		juez = Juez.getJuez();
+		juez = Juez.getJuez(num_jugadores);
 		dado = Dado.getDado(numeroCarasDado);
 	
 		// Creamos una variable jugadorActual que es el jugador que jugara cada turno;
