@@ -7,8 +7,6 @@ public class Juez {
 	 */
 	
 	private static Juez miJuez;
-	private static int numero_jugador;
-
 	
 	private Juez(){};
 	

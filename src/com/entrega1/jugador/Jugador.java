@@ -46,12 +46,13 @@ public class Jugador {
 			int pos_mejor_ficha = 0;
 
 			for(int i = 0; i < fichas.length && !movida; i++){
-				if(fichas[i] < pos_mejor_ficha && fichas[i] + tirada < casillaFinal){
+				if(fichas[i] < mejor_ficha && fichas[i] + tirada <= casillaFinal){
 					mejor_ficha = fichas[i];
 					pos_mejor_ficha = i;
 				}//if
 			}//for
 			
+			if(fichas[pos_mejor_ficha] + tirada <= casillaFinal)
 			fichas[pos_mejor_ficha] = fichas[pos_mejor_ficha] + tirada;
 		}//if
 		
