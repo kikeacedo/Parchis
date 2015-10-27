@@ -1,6 +1,7 @@
 package com.entrega1.jugador;
 
-import com.entrega1.motor.Dado;
+import java.util.ArrayList;
+
 import com.entrega1.motor.Parchis;
 
 /**
@@ -10,74 +11,60 @@ import com.entrega1.motor.Parchis;
 
 public class JugadorHumano extends Jugador{
 	
+	/** METODOS **/
 	public JugadorHumano(Color color, int numJugador) {
 		super(color, numJugador);
 	}//Constructor
 
+	public void moverFicha(int numero_ficha, int tirada){
+		
+		fichas[numero_ficha] = fichas[numero_ficha] + tirada;
+		System.out.println("\tFicha " + numero_ficha + " movida a " + fichas[numero_ficha]);
+		System.out.println("-----------------------------------");
+
+	}//moverFicha
+
 	/**
-	 * Si NO HAY fichas en juego:
-	 *  - comprueba que se pueda sacar ficha
-	 *  - saca ficha
-	 * Si HAY fichas en juego:
-	 * 	- coge la ficha mas retrasada
+	 * Muestra por pantalla las opciones que hay
+	 * Devuelve la ficha que ha elegido el usuario
+	 * @param fichas_posibles array de fichas que puede mover en este turno
 	 * @param tirada (numero que ha sacado en el dado)
-	 * @return TRUE si ha podido mover; FALSE en caso contrario
+	 * @return numero de ficha que ha seleccionado
 	 */
-	public boolean moverFicha(int tirada){
-		turno++;
+	public int seleccionarFicha(ArrayList<Integer> fichas_posibles, int tirada) {
+		turno ++;
+		int ficha = -1;
 
-		boolean movida = false;
+		System.out.println("___________ MOVIMIENTOS ____________");
 
+		for(int i = 0; i < fichas_posibles.size() ;i++){
+			System.out.println("- Ficha " + fichas_posibles.get(i) 
+							 + " de casilla: " + fichas[fichas_posibles.get(i)] 
+							 + " a: " + (fichas[fichas_posibles.get(i)] + tirada));
+		}//for
+		System.out.println("____________________________________");
 
-		// Si no tiene fichas en casa y ha sacado 6, mueve 7
-		if(fichasEnTablero() == 4 && tirada == Dado.getNumCaras())
-			tirada = 7;
+		boolean leyendo = true;
+		while(leyendo){
+			ficha = Parchis.entrada.nextInt();
 
-		System.out.println("Turno "+ turno + " - tirada: " + tirada +"\n");
-
-		// Si puede sacar ficha y ha sacado 5, saca ficha
-		if(sacarFicha() && tirada == 5 && !movida){
-			for(int i = 0; i < fichas.length && !movida; i++){
-				if(fichas[i] == 0){
-					fichas[i] = fichas[i] + casillaInicial;
-					System.out.println("\tFicha "+ i + " sacada de casa\n");
-					movida = true;
-				}//if
-			}//for
-
-			// Si no puede sacar ficha o la tirada es distinto de 5 mueve otra ficha
-		}else if(!movida && fichasEnTablero() > 0){
-
-			for(int i = 0; i < fichas.length && !movida; i++){
-				
-				if(fichas[i] >= casillaInicial && fichas[i] + tirada <= casillaFinal){
-					System.out.println("- Ficha " + i + " de casilla: " + fichas[i] + " a: " + (fichas[i] + tirada));
-				}//if
-			}//for
-
-
-			boolean leyendo = true;
-			while(leyendo){
-				int eleccion = Parchis.entrada.nextInt();
-
-				try{
-					if(fichas[eleccion] == 0)
-						throw new Exception();
-					
-					if(fichas[eleccion] + tirada <= casillaFinal){
-						fichas[eleccion] = fichas[eleccion] + tirada;
-						movida=true;
-						leyendo = false;
-						System.out.println("\t- Ficha " + eleccion + " movida a casilla: " + fichas[eleccion] +"\n");
-					}//if
-				}catch(Exception e){
-					System.out.println("Ficha incorrecta, elige otra");
-				}//try
-			}//while
-		}//if-else
-
-		return movida;
+			try{
+				boolean elige_bien = false;
+				for(int i = 0; i < fichas_posibles.size() && !elige_bien;i++){
+					if(ficha == fichas_posibles.get(i))
+						elige_bien = true;
+				}//
+				if(!elige_bien)
+					throw new Exception();
+				else
+					leyendo = false;
+			}catch(Exception e){
+				System.out.println("Ficha incorrecta, elige otra");
+			}//try
+		}//while
+		
+		return ficha;
 	}//moverFicha
 
 
-}
+}//class

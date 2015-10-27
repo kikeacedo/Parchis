@@ -1,5 +1,7 @@
 package com.entrega1.jugador;
 
+import java.util.ArrayList;
+
 /**
  * En esta clase utilizamos el patron de comportamiento State. Cada jugador tendra un comportamiento dependiendo de su estado.
  * En esta primera entrega creamos solo un JugadorHumano que se controla mediante consola
@@ -18,6 +20,10 @@ public abstract class Jugador {
 
 
 	/** METODOS**/
+	public abstract void moverFicha(int tirada, int tiradaActual);
+	public abstract int seleccionarFicha(ArrayList<Integer> fichas_posibles, int tirada);
+
+
 	public Jugador(Color color, int numJugador){
 		this.color = color;
 		fichas = new int[4];
@@ -26,23 +32,10 @@ public abstract class Jugador {
 
 
 	/**
-	 * Si NO HAY fichas en juego:
-	 *  - comprueba que se pueda sacar ficha
-	 *  - saca ficha
-	 * Si HAY fichas en juego:
-	 * 	- coge la ficha mas retrasada
-	 * @param tirada (numero que ha sacado en el dado)
-	 * @return TRUE si ha podido mover; FALSE en caso contrario
-	 */
-	public abstract boolean moverFicha(int tirada);
-		
-
-
-	/**
 	 * Puede sacar ficha si hay alguna ficha en casa y no hay 2 fichas en la casilla de salida
 	 * @return TRUE si puede sacar ficha. FALSE en caso contrario
 	 */
-	protected boolean sacarFicha(){
+	public boolean sacarFicha(){
 		int num_fichas_casa = 0;
 		int num_fichas_salida = 0;
 
@@ -62,11 +55,28 @@ public abstract class Jugador {
 	 * 
 	 * @return numero de fichas en el tablero
 	 */
-	protected int fichasEnTablero(){
+	public int fichasEnTablero(){
 		int fichas_aux = 0;
 
 		for(int i = 0; i <  this.fichas.length; i++){
 			if(fichas[i] >= casillaInicial)
+				fichas_aux++;
+		}//for
+
+		return fichas_aux;
+
+	}//fichasEnTablero
+
+	
+	/**
+	 * 
+	 * @return numero de fichas en el tablero
+	 */
+	public int fichasEnCasa(){
+		int fichas_aux = 0;
+
+		for(int i = 0; i <  this.fichas.length; i++){
+			if(fichas[i] == casillaInicial)
 				fichas_aux++;
 		}//for
 
@@ -107,4 +117,5 @@ public abstract class Jugador {
 	public void setCasillaFinal( int casillaFinal) {
 		this.casillaFinal = casillaFinal;
 	}
+
 }//class
