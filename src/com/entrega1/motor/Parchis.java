@@ -14,7 +14,7 @@ public class Parchis {
 
 	private Jugador[] jugadores;
 	private Recorrido recorridoPrincipal;
-	private Recorrido recorridoFinal;
+	private Recorrido[] recorridoFinal;
 	private int num_jugadores;
 	private final int num_jugadores_tablero = 4;
 	private Juez juez;
@@ -55,15 +55,39 @@ public class Parchis {
 
 			// El jugador elige la ficha que mover si hay alguna opcion
 			if(!fichas_posibles.isEmpty()){
-				System.out.println("_____________ JUGADOR "+num_jugador+"_____________");
+				System.out.println("_____________ JUGADOR "+num_jugador+" ____________");
+				System.out.println("_____________ TIRADA "+tiradaActual+" _____________");
 
 				int ficha_elegida = jugadorActual.seleccionarFicha(fichas_posibles, tiradaActual);
 				jugadorActual.moverFicha(ficha_elegida,tiradaActual);
 			}//if
-			
+
+			int ganador;
+			if( (ganador = comprobarGanador()) >= 0){
+				System.out.println("_____________ JUGADOR "+ganador+" ____________");
+				System.out.println("_____________ HA GANADO !! ____________");
+				juegoTerminado = true;
+			}
 			//imprimirSituacion();
 		}//whilePrincipal
 	}//
+
+	private int comprobarGanador() {
+		int ganador = -1;
+		for(int i = 0; i < jugadores.length; i++){
+			int num_fichas = -1;
+			for(int j = 0; j < jugadores[i].getFichas().length; j++){
+				if(jugadores[i].getFichas()[j] == jugadores[i].getCasillaFinalColor()){
+					num_fichas++;
+					if(num_fichas == 3)
+							ganador = i;
+				}//if
+			}//for
+		}//for
+
+
+		return ganador;
+	}
 
 	public void mandarFichaCasa(int numeroCasilla, int jugador) {
 		int[] fichas_aux = jugadores[jugador].getFichas();
@@ -84,9 +108,11 @@ public class Parchis {
 
 		for(int i = 0; i < num_jugadores; i++){
 			int[] fichas_inicial ={0,0,0,0};
-			jugadores[i] = new JugadorHumano(Color.getColor(i), i);
+			jugadores[i] = new JugadorMaquina(Color.getColor(i), i);
 			jugadores[i].setCasillaInicial(17*i + 5);
 			jugadores[i].setCasillaFinal((i==0)?68:i*17);
+			jugadores[i].setCasillaFinalColor((i==0)?68 + 8:i*17 + 8);
+
 			jugadores[i].setFichas(fichas_inicial);
 
 			//			System.out.println("jugador " + i + " casilla inicial " + jugadores[i].getCasillaInicial()+ " casilla final " + jugadores[i].getCasillaFinal());
@@ -98,10 +124,16 @@ public class Parchis {
 	 */
 	public void iniciarRecorrido(){
 		recorridoPrincipal = new RecorridoGeneral();
-		recorridoFinal= new RecorridoColor();
-
 		recorridoPrincipal.inicializarRecorrido(num_jugadores_tablero);
-		recorridoFinal.inicializarRecorrido(num_jugadores_tablero);
+
+		recorridoFinal = new Recorrido[num_jugadores];
+
+		for(int i = 0; i < num_jugadores; i++){
+
+			recorridoFinal[i]= new RecorridoColor();
+
+			recorridoFinal[i].inicializarRecorrido(jugadores[i].getCasillaFinal() + 1);
+		}
 	}//iniciarRecorrido
 
 
@@ -139,11 +171,11 @@ public class Parchis {
 		this.recorridoPrincipal = recorridoPrincipal;
 	}
 
-	public Recorrido getRecorridoFinal() {
+	public Recorrido[] getRecorridoFinal() {
 		return recorridoFinal;
 	}
 
-	public void setRecorridoFinal(Recorrido recorridoFinal) {
+	public void setRecorridoFinal(Recorrido[] recorridoFinal) {
 		this.recorridoFinal = recorridoFinal;
 	}
 
@@ -162,6 +194,10 @@ public class Parchis {
 	public int getNumJugadores(){
 		return num_jugadores;
 	}//getNumJugadores
+
+	public int getNum_jugadores_tablero() {
+		return num_jugadores_tablero;
+	}
 
 
 }//class

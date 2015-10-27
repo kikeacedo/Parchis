@@ -4,13 +4,13 @@ import com.entrega1.casilla.*;
 
 public class RecorridoColor extends Recorrido{
 
-	public void inicializarRecorrido(int numJugadores) {
+	public void inicializarRecorrido(int casillaInicial) {
 		casillas= new Casilla[8];
 		for(int i = 0; i < 7; i++){
-			casillas[i] = new CasillaPasillo(i);
+			casillas[i] = new CasillaPasillo(i + casillaInicial);
 		}//for
 
-		casillas[7] = new CasillaMeta(7);
+		casillas[7] = new CasillaMeta(casillaInicial + 7);
 
 	}//inicializarRecorrido
 
@@ -21,7 +21,6 @@ public class RecorridoColor extends Recorrido{
 
 	@Override
 	public boolean sacarFicha(int num_jugador, int num_casilla) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

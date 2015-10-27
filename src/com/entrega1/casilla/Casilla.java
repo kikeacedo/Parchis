@@ -4,9 +4,9 @@ public abstract class Casilla {
 
 	/** ATRIBUTOS **/
 	
-	private int[] fichas;
-	private int num_fichas;
-	private int numeroCasilla;
+	protected int[] fichas;
+	protected int num_fichas;
+	protected int numeroCasilla;
 	
 	/** METODOS **/
 

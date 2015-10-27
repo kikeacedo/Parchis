@@ -10,11 +10,13 @@ import java.util.ArrayList;
 public abstract class Jugador {
 
 	/** ATRIBUTOS**/
+	protected int id;
 	protected Color color;
 	protected int[] fichas;
 
 	protected int casillaInicial;
 	protected int casillaFinal;
+	protected int casillaFinalColor;
 	protected int turno;
 
 
@@ -28,6 +30,7 @@ public abstract class Jugador {
 		this.color = color;
 		fichas = new int[4];
 		turno = 0;
+		id = numJugador;
 	}//constructor
 
 
@@ -116,6 +119,17 @@ public abstract class Jugador {
 
 	public void setCasillaFinal( int casillaFinal) {
 		this.casillaFinal = casillaFinal;
+	}
+	
+	public int getCasillaFinalColor(){
+		return casillaFinalColor;
+	}
+	
+	public void setCasillaFinalColor(int casillaFinalColor) {
+		this.casillaFinalColor = casillaFinalColor;
+	}
+	public int getId() {
+		return id;
 	}
 
 }//class

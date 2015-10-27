@@ -89,10 +89,16 @@ public class Juez {
 			for(int i = 0; i < fichas.length ; i++){
 
 				if(	fichas[i] >= jugadorActual.getCasillaInicial() && 
-					fichas[i] + tiradaActual <= jugadorActual.getCasillaFinal()){
+						fichas[i] + tiradaActual <= jugadorActual.getCasillaFinalColor() ){
 
-					if(! parchis.getRecorridoPrincipal().getRecorrido()[fichas[i]+tiradaActual].estaLlena())
-						opciones.add(i);
+					if(fichas[i]+tiradaActual <= jugadorActual.getCasillaFinal()){
+						if(! parchis.getRecorridoPrincipal().getRecorrido()[fichas[i]+tiradaActual].estaLlena())
+							opciones.add(i);
+					}else if(fichas[i]+tiradaActual <= jugadorActual.getCasillaFinalColor()){
+						if(! parchis.getRecorridoFinal()[jugadorActual.getId()].getRecorrido()[fichas[i] + tiradaActual - (parchis.getNum_jugadores_tablero()*17 +1)].estaLlena()
+								&& fichas[i] + tiradaActual <= jugadorActual.getCasillaFinalColor())
+							opciones.add(i);
+					}//if-else
 				}//if
 			}//for
 		}
@@ -106,6 +112,7 @@ public class Juez {
 	 * @param jugadorActual
 	 * @return numero que ha salido en el dado
 	 */
+	@SuppressWarnings("static-access")
 	public int tira(Jugador jugadorActual) {
 		int tirada = dado.tirarDado();	
 
