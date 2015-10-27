@@ -1,7 +1,6 @@
 package com.entrega1.recorrido;
 
 import com.entrega1.casilla.*;
-import com.entrega1.jugador.Jugador;
 import com.entrega1.motor.FichaComida;
 
 public class RecorridoGeneral extends Recorrido{

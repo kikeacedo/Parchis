@@ -1,5 +1,7 @@
 package com.entrega1.motor;
 
+import java.util.Scanner;
+
 import com.entrega1.jugador.*;
 import com.entrega1.recorrido.*;
 
@@ -16,6 +18,7 @@ public class Parchis {
 	private static Parchis miParchis;
 	private final int numeroCarasDado = 6;
 	private boolean juegoTerminado = false;
+	public static Scanner entrada;
 	
 	/**
 	 * En esta clase utilizamos el patron de construccion Singleton para que solo pueda haber una instancia de Parchis
@@ -24,7 +27,10 @@ public class Parchis {
 	
 	/** METODOS **/
 	
-	private Parchis(){}//constructor
+	private Parchis(){
+		
+		entrada = new Scanner(System.in);
+	}//constructor
 	
 	/**
 	 * Metodo para empezar el juego
@@ -46,7 +52,7 @@ public class Parchis {
 			
 			jugadorActual.moverFicha(dado.tirarDado());
 			
-			imprimirSituacion();
+			//imprimirSituacion();
 		}//whilePrincipal
 	}//
 	
@@ -69,7 +75,7 @@ public class Parchis {
 
 		for(int i = 0; i < num_jugadores; i++){
 			int[] fichas_inicial ={0,0,0,0};
-			jugadores[i] = new Jugador(Color.getColor(i), i);
+			jugadores[i] = new JugadorHumano(Color.getColor(i), i);
 			jugadores[i].setCasillaInicial(17*i + 5);
 			jugadores[i].setCasillaFinal((i==0)?68:i*17);
 			jugadores[i].setFichas(fichas_inicial);
