@@ -1,10 +1,12 @@
 package com.entrega1.recorrido;
 
 import com.entrega1.casilla.*;
-import com.entrega1.motor.FichaComida;
 
 public class RecorridoGeneral extends Recorrido{
 
+	/**
+	 * Inicializa el recorrido dependiendo del numero de jugadores
+	 */
 	public void inicializarRecorrido(int numJugadores) {
 		casillas = new Casilla[numJugadores*17 + 1];
 
@@ -32,7 +34,7 @@ public class RecorridoGeneral extends Recorrido{
 	}//inicializarRecorrido
 
 
-	public boolean meterFicha(int num_jugador, int num_casilla) throws FichaComida {
+	public boolean meterFicha(int num_jugador, int num_casilla) {
 		boolean metida = false;
 		Casilla casilla = casillas[num_casilla];
 		if(!casilla.estaLlena()){
@@ -43,11 +45,11 @@ public class RecorridoGeneral extends Recorrido{
 		}//if
 
 		return metida;
-	}
+	}//meterFicha
 
 	@Override
 	public boolean sacarFicha(int num_jugador, int num_casilla) {
 		return casillas[num_casilla].sacarFicha(num_jugador);
-	}
+	}//sacarFicha
 
 }//class

@@ -1,7 +1,6 @@
 package com.entrega1.recorrido;
 
 import com.entrega1.casilla.Casilla;
-import com.entrega1.motor.FichaComida;
 
 public abstract class Recorrido {
 
@@ -15,7 +14,7 @@ public abstract class Recorrido {
 	 
 	 public abstract void inicializarRecorrido(int numJugadores);
 	 
-	 public abstract boolean meterFicha(int num_jugador, int num_casilla) throws FichaComida;
+	 public abstract boolean meterFicha(int num_jugador, int num_casilla);
 	 public abstract boolean sacarFicha(int num_jugador, int num_casilla);
 
 	

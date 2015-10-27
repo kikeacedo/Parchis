@@ -1,7 +1,11 @@
 package com.entrega1.jugador;
 
-public abstract class Jugador {
+/**
+ * En esta clase utilizamos el patron de comportamiento State. Cada jugador tendra un comportamiento dependiendo de su estado.
+ * En esta primera entrega creamos solo un JugadorHumano que se controla mediante consola
+ */
 
+public abstract class Jugador {
 
 	/** ATRIBUTOS**/
 	protected Color color;
@@ -53,6 +57,7 @@ public abstract class Jugador {
 		return num_fichas_casa > 0 && num_fichas_salida < 2;
 	}//hayFichaEnCasa
 
+	
 	/**
 	 * 
 	 * @return numero de fichas en el tablero

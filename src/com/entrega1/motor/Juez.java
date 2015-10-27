@@ -44,17 +44,6 @@ public class Juez {
 	}//seleccionarPrimerJugador
 
 	/**
-	 * 
-	 * @return miJuez
-	 */
-	public static Juez getJuez(int num_jugadores){
-		if(miJuez == null)
-			miJuez = new Juez(num_jugadores);
-
-		return miJuez;
-	}//getParchis
-
-	/**
 	 * Metodo que elige el siguiente jugador.
 	 * @return num_jugador del siguiente turno
 	 */
@@ -65,5 +54,15 @@ public class Juez {
 		return proximo_jugador;//(int) (Math.random()*3);
 	}//elegirJugador
 
+	/**
+	 * 
+	 * @return miJuez
+	 */
+	public static Juez getJuez(int num_jugadores){
+		if(miJuez == null)
+			miJuez = new Juez(num_jugadores);
+		
+		return miJuez;
+	}//getParchis
 
 }//class

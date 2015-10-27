@@ -2,10 +2,13 @@ package com.entrega1.motor;
 
 public class Dado {
 
+	/**
+	 * En esta clase utilizamos el patron de construccion Singleton para que solo pueda haber una instancia de Dado
+	 */
 	
 	/** DECLARACION DE ATRIBUTOS**/
 	
-	private final int num_caras;
+	private static int num_caras;
 	private static Dado miDado;
 	
 	/** DECLARACION DE METODOS**/
@@ -21,8 +24,11 @@ public class Dado {
 	public static Dado getDado(int caras){
 		if(miDado == null)
 			miDado = new Dado(caras);
-		
 		return miDado;
+	}
+	
+	public static int getNumCaras(){
+		return num_caras;
 	}
 	
 }//class

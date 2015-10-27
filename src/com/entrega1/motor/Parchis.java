@@ -5,6 +5,9 @@ import java.util.Scanner;
 import com.entrega1.jugador.*;
 import com.entrega1.recorrido.*;
 
+/**
+ * En esta clase utilizamos el patron de construccion Singleton para que solo pueda haber una instancia de Parchis
+ */
 public class Parchis {
 	/** ATRIBUTOS **/
 	
@@ -19,10 +22,6 @@ public class Parchis {
 	private final int numeroCarasDado = 6;
 	private boolean juegoTerminado = false;
 	public static Scanner entrada;
-	
-	/**
-	 * En esta clase utilizamos el patron de construccion Singleton para que solo pueda haber una instancia de Parchis
-	 */
 	
 	
 	/** METODOS **/

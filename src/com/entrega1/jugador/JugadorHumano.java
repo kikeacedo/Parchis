@@ -1,9 +1,15 @@
 package com.entrega1.jugador;
 
+import com.entrega1.motor.Dado;
 import com.entrega1.motor.Parchis;
 
-public class JugadorHumano extends Jugador{
+/**
+ * En esta clase utilizamos el patron de comportamiento State. Cada jugador tendra un comportamiento dependiendo de su estado.
+ * En esta primera entrega creamos solo un JugadorHumano que se controla mediante consola
+ */
 
+public class JugadorHumano extends Jugador{
+	
 	public JugadorHumano(Color color, int numJugador) {
 		super(color, numJugador);
 	}//Constructor
@@ -24,7 +30,7 @@ public class JugadorHumano extends Jugador{
 
 
 		// Si no tiene fichas en casa y ha sacado 6, mueve 7
-		if(fichasEnTablero() == 4 && tirada == 6)
+		if(fichasEnTablero() == 4 && tirada == Dado.getNumCaras())
 			tirada = 7;
 
 		System.out.println("Turno "+ turno + " - tirada: " + tirada +"\n");
@@ -43,7 +49,8 @@ public class JugadorHumano extends Jugador{
 		}else if(!movida && fichasEnTablero() > 0){
 
 			for(int i = 0; i < fichas.length && !movida; i++){
-				if(fichas[i] >= 5 && fichas[i] + tirada <= casillaFinal){
+				
+				if(fichas[i] >= casillaInicial && fichas[i] + tirada <= casillaFinal){
 					System.out.println("- Ficha " + i + " de casilla: " + fichas[i] + " a: " + (fichas[i] + tirada));
 				}//if
 			}//for
