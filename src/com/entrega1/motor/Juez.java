@@ -4,26 +4,40 @@ import java.util.ArrayList;
 
 import com.entrega1.jugador.Jugador;
 
+/**
+ * @author Enrique Acedo
+ * @author Adrian Ojeda
+ * @author Luis Miguel Garcia
+ * @version 1.0
+ * @date 27/10/2015
+ *
+ */
+
+/**
+ * En esta clase utilizamos el patron de construccion Singleton para que solo pueda haber una instancia de Juez en la clase Parchis
+ * 
+ * En esta clase utilizamos el patron de construccion Singleton para que solo pueda haber una instancia de Dado en la clase Juez
+ */
+
 public class Juez {
 
-	/**
-	 * En esta clase utilizamos el patron de construccion Singleton para que solo pueda haber una instancia de Juez
-	 */
-
+	/** ATRIBUTOS **/
 	private static Juez miJuez;
 	private int turno_jugador;
 	private int num_jugadores;
 	private Dado dado;
 	private ArrayList<Integer> ultimas_tiradas;
 	private Parchis parchis;
+	private static boolean meteFichaEnCasa;
 
-
+	/** METODOS **/
 	private Juez(int num_jugadores, int numeroCarasDado){
 		this.num_jugadores = num_jugadores;
 		turno_jugador = seleccionarPrimerJugador() - 1;
 		dado = Dado.getDado(numeroCarasDado);
 		ultimas_tiradas = new ArrayList<Integer>();
 		parchis = Parchis.getParchis();
+		meteFichaEnCasa = false;
 	}//Constructor
 
 	/**
@@ -65,8 +79,11 @@ public class Juez {
 	 */
 	public int elegirJugador(){
 
-		if(ultimas_tiradas.isEmpty())
-			turno_jugador = (num_jugadores + turno_jugador + 1) % num_jugadores;
+		if(ultimas_tiradas.isEmpty() && !meteFichaEnCasa)
+			turno_jugador++;
+
+		if(turno_jugador >= parchis.getNumJugadores())
+			turno_jugador = 0;
 
 		return turno_jugador;
 	}//elegirJugador
@@ -114,16 +131,21 @@ public class Juez {
 	 */
 	@SuppressWarnings("static-access")
 	public int tira(Jugador jugadorActual) {
-		int tirada = dado.tirarDado();	
+		int tirada;	
+		if(!meteFichaEnCasa){
+			tirada = dado.tirarDado();
+			if(tirada == dado.getNumCaras()){
+				if(jugadorActual.fichasEnCasa() == 0 )
+					tirada++;
 
-		if(tirada == dado.getNumCaras()){
-			if(jugadorActual.fichasEnCasa() == 0 )
-				tirada++;
-
-			ultimas_tiradas.add(6);
+				ultimas_tiradas.add(6);
+			}else{
+				ultimas_tiradas.clear();
+			}//if-else
 		}else{
-			ultimas_tiradas.clear();
-		}//if-else
+			tirada = 10;
+			meteFichaEnCasa = false;
+		}
 
 		return tirada;
 	}//tira
@@ -138,6 +160,15 @@ public class Juez {
 
 		return miJuez;
 	}//getParchis
+
+
+	public boolean isMeteFichaEnCasa() {
+		return meteFichaEnCasa;
+	}
+
+	public static void setMeteFichaEnCasa(boolean valor) {
+		meteFichaEnCasa = valor;
+	}
 
 
 

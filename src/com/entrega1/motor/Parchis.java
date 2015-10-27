@@ -7,11 +7,23 @@ import com.entrega1.jugador.*;
 import com.entrega1.recorrido.*;
 
 /**
- * En esta clase utilizamos el patron de construccion Singleton para que solo pueda haber una instancia de Parchis
+ * @author Enrique Acedo
+ * @author Adrian Ojeda
+ * @author Luis Miguel Garcia
+ * @version 1.0
+ * @date 27/10/2015
+ *
  */
-public class Parchis {
-	/** ATRIBUTOS **/
 
+/**
+ * En esta clase utilizamos el patron de construccion Singleton para que solo pueda haber una instancia de Parchis en la clase Game
+ *
+ * En esta clase utilizamos el patron de construccion Singleton para que solo pueda haber una instancia de Juez en la clase Parchis
+ */
+ 
+public class Parchis {
+	
+	/** ATRIBUTOS **/
 	private Jugador[] jugadores;
 	private Recorrido recorridoPrincipal;
 	private Recorrido[] recorridoFinal;
@@ -25,7 +37,6 @@ public class Parchis {
 
 
 	/** METODOS **/
-
 	private Parchis(){
 
 		entrada = new Scanner(System.in);
@@ -47,31 +58,36 @@ public class Parchis {
 			int num_jugador = juez.elegirJugador();
 			jugadorActual = jugadores[num_jugador];
 
-			//Tiramos el dado
-			tiradaActual = juez.tira(jugadorActual);
+			// Tiramos el dado 
+				tiradaActual = juez.tira(jugadorActual);
+			
 
-			//EL juez mira a ver que fichas puede mover ese jugador
+			// El juez mira a ver que fichas puede mover ese jugador
 			ArrayList<Integer> fichas_posibles = juez.verOpciones(jugadorActual,tiradaActual);
 
 			// El jugador elige la ficha que mover si hay alguna opcion
 			if(!fichas_posibles.isEmpty()){
-				System.out.println("_____________ JUGADOR "+num_jugador+" ____________");
-				System.out.println("_____________ TIRADA "+tiradaActual+" _____________");
+				System.out.println("_____________ JUGADOR "+jugadorActual.getColor()+" ____________");
+				System.out.println("_____________ TIRADA: "+tiradaActual+" _______________");
 
 				int ficha_elegida = jugadorActual.seleccionarFicha(fichas_posibles, tiradaActual);
 				jugadorActual.moverFicha(ficha_elegida,tiradaActual);
 			}//if
 
+			// Comprueba si hay algun ganador para continuar o terminar la partida
 			int ganador;
 			if( (ganador = comprobarGanador()) >= 0){
-				System.out.println("_____________ JUGADOR "+ganador+" ____________");
+				System.out.println("_____________ JUGADOR "+jugadores[ganador].getColor()+" ____________");
 				System.out.println("_____________ HA GANADO !! ____________");
 				juegoTerminado = true;
 			}
-			//imprimirSituacion();
 		}//whilePrincipal
 	}//
 
+	/**
+	 *  Metodo que comprueba si algun jugador tiene sus 4 fichas en la casilla meta
+	 * @return el jugador ganador
+	 */
 	private int comprobarGanador() {
 		int ganador = -1;
 		for(int i = 0; i < jugadores.length; i++){
@@ -80,7 +96,7 @@ public class Parchis {
 				if(jugadores[i].getFichas()[j] == jugadores[i].getCasillaFinalColor()){
 					num_fichas++;
 					if(num_fichas == 3)
-							ganador = i;
+						ganador = i;
 				}//if
 			}//for
 		}//for
@@ -89,6 +105,12 @@ public class Parchis {
 		return ganador;
 	}
 
+	/**
+	 * Metodo que manda la ficha que esta en la casilla numeroCasilla 
+	 * del jugador "jugador" a casa ya sea porque se la han comido o porque ha sacado tres veces 6.
+	 * @param numeroCasilla
+	 * @param jugador
+	 */
 	public void mandarFichaCasa(int numeroCasilla, int jugador) {
 		int[] fichas_aux = jugadores[jugador].getFichas();
 
@@ -108,7 +130,7 @@ public class Parchis {
 
 		for(int i = 0; i < num_jugadores; i++){
 			int[] fichas_inicial ={0,0,0,0};
-			jugadores[i] = new JugadorMaquina(Color.getColor(i), i);
+			jugadores[i] = new JugadorPersona(Color.getColor(i), i);
 			jugadores[i].setCasillaInicial(17*i + 5);
 			jugadores[i].setCasillaFinal((i==0)?68:i*17);
 			jugadores[i].setCasillaFinalColor((i==0)?68 + 8:i*17 + 8);
@@ -152,10 +174,7 @@ public class Parchis {
 	}//imprimirSituacionJugadores
 
 
-	/**
-	 * 
-	 * @return miParchis
-	 */
+	/** GETTERS AND SETTERS **/
 	public static Parchis getParchis(){
 		if(miParchis == null)
 			miParchis = new Parchis();
@@ -179,18 +198,10 @@ public class Parchis {
 		this.recorridoFinal = recorridoFinal;
 	}
 
-	/**
-	 * Establece el numero de jugadores de la partida.
-	 * @param num Numero de jugadores
-	 */
 	public void setNumJugadores(int num){
 		num_jugadores = num;
 	}//setJugadores
 
-	/**
-	 * 
-	 * @return numero de jugadores
-	 */
 	public int getNumJugadores(){
 		return num_jugadores;
 	}//getNumJugadores

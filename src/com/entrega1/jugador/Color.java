@@ -1,12 +1,26 @@
 package com.entrega1.jugador;
 
+/**
+ * @author Enrique Acedo
+ * @author Adrian Ojeda
+ * @author Luis Miguel Garcia
+ * @version 1.0
+ * @date 27/10/2015
+ *
+ */
+
 public enum Color {
 	
 	Rojo, Azul, Amarillo, Verde;
 	
 	
-	public static Color getColor(int i){
-		return Color.values()[i];
+	/**
+	 * Devuelve el color en la posicion que indique
+	 * @param numero_color
+	 * @return Color de la posicion numero_color
+	 */
+	public static Color getColor(int numero_color){
+		return Color.values()[numero_color];
 	}
 
 }//class

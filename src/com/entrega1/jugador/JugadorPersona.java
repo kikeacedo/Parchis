@@ -2,23 +2,40 @@ package com.entrega1.jugador;
 
 import java.util.ArrayList;
 
+import com.entrega1.motor.Juez;
 import com.entrega1.motor.Parchis;
 
 /**
- * En esta clase utilizamos el patron de comportamiento State. Cada jugador tendra un comportamiento dependiendo de su estado.
- * En esta primera entrega creamos solo un JugadorHumano que se controla mediante consola
+ * @author Enrique Acedo
+ * @author Adrian Ojeda
+ * @author Luis Miguel Garcia
+ * @version 1.0
+ * @date 27/10/2015
+ *
  */
 
-public class JugadorHumano extends Jugador{
+/**
+ * En esta clase utilizamos el patron de comportamiento State. Cada jugador tendra un comportamiento dependiendo de su estado.
+ * En esta clase creamos un JugadorHumano que se controla mediante consola
+ */
+
+public class JugadorPersona extends Jugador{
 	
 	/** METODOS **/
-	public JugadorHumano(Color color, int numJugador) {
+	public JugadorPersona(Color color, int numJugador) {
 		super(color, numJugador);
 	}//Constructor
 
+	/**
+	 * Metodo que mueve la ficha N casillas
+	 */
 	public void moverFicha(int numero_ficha, int tirada){
 		
 		fichas[numero_ficha] = fichas[numero_ficha] + tirada;
+		// Si mete en meta la ficha, pone la variable a true;
+		if(fichas[numero_ficha] == casillaFinalColor)
+			Juez.setMeteFichaEnCasa(true);
+		
 		System.out.println("\tFicha " + numero_ficha + " movida a " + fichas[numero_ficha]);
 		System.out.println("-----------------------------------");
 
@@ -35,14 +52,14 @@ public class JugadorHumano extends Jugador{
 		turno ++;
 		int ficha = -1;
 
-		System.out.println("___________ MOVIMIENTOS ____________");
+		System.out.println("_____________ MOVIMIENTOS _____________");
 
 		for(int i = 0; i < fichas_posibles.size() ;i++){
 			System.out.println("- Ficha " + fichas_posibles.get(i) 
 							 + " de casilla: " + fichas[fichas_posibles.get(i)] 
 							 + " a: " + (fichas[fichas_posibles.get(i)] + tirada));
 		}//for
-		System.out.println("____________________________________");
+		System.out.println("_______________________________________");
 
 		boolean leyendo = true;
 		while(leyendo){
