@@ -4,8 +4,7 @@ import com.entrega1.motor.Parchis;
 
 /**
  * @author Enrique Acedo
- * @author Adrian Ojeda
- * @author Luis Miguel Garcia
+
  * @version 1.0
  * @date 27/10/2015
  *
@@ -15,7 +14,7 @@ import com.entrega1.motor.Parchis;
  * En esta clase utilizamos el patron de construccion Singleton para que solo pueda haber una instancia de Parchis en la clase Game
  */
 public class Game {
-	
+
 	/** ATRIBUTOS **/
 	private static Parchis parchis = Parchis.getParchis();
 
@@ -23,22 +22,31 @@ public class Game {
 	public static void main(String[] args) {
 		boolean leyendo = true;
 		int num_jugadores = 0;
+		int num_jugadores_persona = 0;
+
 
 		while(leyendo){
 			try{
 				System.out.println("Bienvenido al PARCHIS\n" + 
 						"Por favor, elija el numero de jugadores (1-4)");
-				
+
 				num_jugadores = Parchis.entrada.nextInt();
 
-				leyendo = false;
+				System.out.println("\n" + 
+						"¿Cuantos jugadores desea controlar usted?");
+
+				num_jugadores_persona = Parchis.entrada.nextInt();
+
+				if(num_jugadores >= num_jugadores_persona)
+					leyendo = false;
 			}catch(Exception e){
-				System.out.println("Ficha incorrecta, elige otra");
+				System.out.println("Error, empieza una nueva partida");
 			}//try
 		}//while
 
 
 		parchis.setNumJugadores(num_jugadores);
+		parchis.setNumJugadoresPersona(num_jugadores_persona);
 		parchis.iniciarJugadores();
 		parchis.iniciarRecorrido();
 

@@ -4,15 +4,14 @@ import java.util.ArrayList;
 
 /**
  * @author Enrique Acedo
- * @author Adrian Ojeda
- * @author Luis Miguel Garcia
+
  * @version 1.0
  * @date 27/10/2015
  *
  */
 
 /**
- * En esta clase utilizamos el patron de comportamiento State. Cada jugador tendra un comportamiento dependiendo de su estado.
+ * En esta clase utilizamos el patron de comportamiento Strategy. Cada jugador tendra un comportamiento dependiendo de su estado.
  * En esta primera entrega creamos solo un JugadorHumano que se controla mediante consola
  */
 
@@ -98,8 +97,6 @@ public abstract class Jugador {
 			if( this.fichas[i] == casillaInicial)
 				num_fichas_salida++;
 		}//for
-
-
 		return num_fichas_casa > 0 && num_fichas_salida < 2;
 	}//hayFichaEnCasa
 

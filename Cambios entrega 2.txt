@@ -1,0 +1,13 @@
+Las mejoras realizadas respecto a la primera entrega son:
+
+1- Cambio de patron State a Strategy en las clases Jugador, JugadorPersona y JugadorMaquina. 
+   Ademas, al iniciar la partida te deja elegir el numero de personas que quieres controlar.
+  
+2- Patron Fachada en la clase TraduccionMovimiento que nos permite mostrar al jugador los movimientos que tiene
+   de una forma mas clara. Antes te mostraba el numero de casilla y ahora te dice el tipo de casilla que es, de esa forma, el jugador
+   podra elegir con mas conocimientos de la partida.
+   
+3- El metodo que utilizo para la traduccion refactoriza el codigo pues habia codigo duplicado en diferentes clases y ahora esta todo
+   en TraduccionMovimiento.
+   
+4- He intentado acortar los metodos lo maximo posible pero hay algunos que son imposible, y hacer otros metodos seria liar el codigo.

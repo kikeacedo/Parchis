@@ -2,8 +2,7 @@ package com.entrega1.motor;
 
 /**
  * @author Enrique Acedo
- * @author Adrian Ojeda
- * @author Luis Miguel Garcia
+
  * @version 1.0
  * @date 27/10/2015
  *

@@ -2,8 +2,7 @@ package com.entrega1.casilla;
 
 /**
  * @author Enrique Acedo
- * @author Adrian Ojeda
- * @author Luis Miguel Garcia
+
  * @version 1.0
  * @date 27/10/2015
  *
@@ -35,5 +34,10 @@ public class CasillaMeta extends Casilla{
 	public boolean estaLlena(){
 		return num_fichas == 4;
 	}//estaVacia
+
+
+	public String tipoCasilla() {
+		return "Meta";
+	}
 
 }//class

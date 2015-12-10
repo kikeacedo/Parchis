@@ -7,15 +7,14 @@ import com.entrega1.motor.Parchis;
 
 /**
  * @author Enrique Acedo
- * @author Adrian Ojeda
- * @author Luis Miguel Garcia
+
  * @version 1.0
  * @date 27/10/2015
  *
  */
 
 /**
- * En esta clase utilizamos el patron de comportamiento State. Cada jugador tendra un comportamiento dependiendo de su estado.
+ * En esta clase utilizamos el patron de comportamiento Strategy. Cada jugador tendra un comportamiento dependiendo de su estado.
  * En esta clase creamos un JugadorHumano que se controla mediante consola
  */
 
@@ -36,7 +35,7 @@ public class JugadorPersona extends Jugador{
 		if(fichas[numero_ficha] == casillaFinalColor)
 			Juez.setMeteFichaEnCasa(true);
 		
-		System.out.println("\tFicha " + numero_ficha + " movida a " + fichas[numero_ficha]);
+		System.out.println("\tFicha " + numero_ficha + " movida a " + TraduccionMovimiento.getTipoCasilla(fichas[numero_ficha], id));
 		System.out.println("-----------------------------------");
 
 	}//moverFicha
@@ -52,14 +51,7 @@ public class JugadorPersona extends Jugador{
 		turno ++;
 		int ficha = -1;
 
-		System.out.println("_____________ MOVIMIENTOS _____________");
-
-		for(int i = 0; i < fichas_posibles.size() ;i++){
-			System.out.println("- Ficha " + fichas_posibles.get(i) 
-							 + " de casilla: " + fichas[fichas_posibles.get(i)] 
-							 + " a: " + (fichas[fichas_posibles.get(i)] + tirada));
-		}//for
-		System.out.println("_______________________________________");
+		TraduccionMovimiento.traducirMovimientos(fichas_posibles, fichas, tirada, color, id);
 
 		boolean leyendo = true;
 		while(leyendo){

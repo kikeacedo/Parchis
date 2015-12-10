@@ -8,8 +8,6 @@ import com.entrega1.recorrido.*;
 
 /**
  * @author Enrique Acedo
- * @author Adrian Ojeda
- * @author Luis Miguel Garcia
  * @version 1.0
  * @date 27/10/2015
  *
@@ -20,14 +18,15 @@ import com.entrega1.recorrido.*;
  *
  * En esta clase utilizamos el patron de construccion Singleton para que solo pueda haber una instancia de Juez en la clase Parchis
  */
- 
+
 public class Parchis {
-	
+
 	/** ATRIBUTOS **/
 	private Jugador[] jugadores;
 	private Recorrido recorridoPrincipal;
 	private Recorrido[] recorridoFinal;
 	private int num_jugadores;
+	private int num_jugadores_persona;
 	private final int num_jugadores_tablero = 4;
 	private Juez juez;
 	private static Parchis miParchis;
@@ -59,8 +58,8 @@ public class Parchis {
 			jugadorActual = jugadores[num_jugador];
 
 			// Tiramos el dado 
-				tiradaActual = juez.tira(jugadorActual);
-			
+			tiradaActual = juez.tira(jugadorActual);
+
 
 			// El juez mira a ver que fichas puede mover ese jugador
 			ArrayList<Integer> fichas_posibles = juez.verOpciones(jugadorActual,tiradaActual);
@@ -128,9 +127,16 @@ public class Parchis {
 	public void iniciarJugadores(){
 		jugadores = new Jugador[num_jugadores];
 
+		int aux = num_jugadores_persona;
+
 		for(int i = 0; i < num_jugadores; i++){
 			int[] fichas_inicial ={0,0,0,0};
-			jugadores[i] = new JugadorPersona(Color.getColor(i), i);
+			if(aux > 0){
+				jugadores[i] = new JugadorPersona(Color.getColor(i), i);
+				aux--;
+			}else{
+				jugadores[i] = new JugadorMaquina(Color.getColor(i), i);
+			}//if-else
 			jugadores[i].setCasillaInicial(17*i + 5);
 			jugadores[i].setCasillaFinal((i==0)?68:i*17);
 			jugadores[i].setCasillaFinalColor((i==0)?68 + 8:i*17 + 8);
@@ -200,6 +206,10 @@ public class Parchis {
 
 	public void setNumJugadores(int num){
 		num_jugadores = num;
+	}//setJugadores
+
+	public void setNumJugadoresPersona(int num){
+		num_jugadores_persona = num;
 	}//setJugadores
 
 	public int getNumJugadores(){

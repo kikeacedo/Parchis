@@ -2,8 +2,7 @@ package com.entrega1.casilla;
 
 /**
  * @author Enrique Acedo
- * @author Adrian Ojeda
- * @author Luis Miguel Garcia
+
  * @version 1.0
  * @date 27/10/2015
  *
@@ -24,5 +23,10 @@ public class CasillaSalida extends Casilla{
 	public CasillaSalida(int numeroCasilla) {
 		super(numeroCasilla);
 	}//Constructor
+
+	@Override
+	public String tipoCasilla() {
+		return "Salida";
+	}
 
 }//class
