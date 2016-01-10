@@ -3,7 +3,9 @@ package com.entrega1.jugador;
 import java.util.ArrayList;
 
 import com.entrega1.motor.Juez;
-import com.entrega1.motor.Parchis;
+import com.entrega1.jugador.Color;
+import com.entrega1.jugador.Jugador;
+import com.entrega1.jugador.TraduccionMovimiento;
 
 /**
  * @author Enrique Acedo
@@ -15,13 +17,14 @@ import com.entrega1.motor.Parchis;
 
 /**
  * En esta clase utilizamos el patron de comportamiento Strategy. Cada jugador tendra un comportamiento dependiendo de su estado.
- * En esta clase creamos un JugadorHumano que se controla mediante consola
+ * En esta clase creamos un JugadorMaquina que se elige automaticamente la ficha que este mas adelantada
  */
 
-public class JugadorPersona extends Jugador{
-	
+public class JugadorMaquina extends Jugador{
+
 	/** METODOS **/
-	public JugadorPersona(Color color, int numJugador) {
+
+	public JugadorMaquina(Color color, int numJugador) {
 		super(color, numJugador);
 	}//Constructor
 
@@ -29,12 +32,12 @@ public class JugadorPersona extends Jugador{
 	 * Metodo que mueve la ficha N casillas
 	 */
 	public void moverFicha(int numero_ficha, int tirada){
-		
+
 		fichas[numero_ficha] = fichas[numero_ficha] + tirada;
 		// Si mete en meta la ficha, pone la variable a true;
 		if(fichas[numero_ficha] == casillaFinalColor)
 			Juez.setMeteFichaEnCasa(true);
-		
+
 		System.out.println("\tFicha " + numero_ficha + " movida a " + TraduccionMovimiento.getTipoCasilla(fichas[numero_ficha], id));
 		System.out.println("-----------------------------------");
 
@@ -53,27 +56,9 @@ public class JugadorPersona extends Jugador{
 
 		TraduccionMovimiento.traducirMovimientos(fichas_posibles, fichas, tirada, color, id);
 
-		boolean leyendo = true;
-		while(leyendo){
-			ficha = Parchis.entrada.nextInt();
+		ficha = fichas_posibles.get(0);
 
-			try{
-				boolean elige_bien = false;
-				for(int i = 0; i < fichas_posibles.size() && !elige_bien;i++){
-					if(ficha == fichas_posibles.get(i))
-						elige_bien = true;
-				}//
-				if(!elige_bien)
-					throw new Exception();
-				else
-					leyendo = false;
-			}catch(Exception e){
-				System.out.println("Ficha incorrecta, elige otra");
-			}//try
-		}//while
-		
 		return ficha;
 	}//moverFicha
-
 
 }//class

@@ -3,8 +3,12 @@ package com.entrega1.motor;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.entrega1.jugador.*;
+import com.entrega1.jugador.Color;
+import com.entrega1.jugador.Jugador;
+import com.entrega1.jugador.JugadorMaquina;
+import com.entrega1.jugador.JugadorPersona;
 import com.entrega1.recorrido.*;
+import com.entrega1.jugador.*;
 
 /**
  * @author Enrique Acedo

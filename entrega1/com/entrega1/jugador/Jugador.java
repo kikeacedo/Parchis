@@ -2,6 +2,8 @@ package com.entrega1.jugador;
 
 import java.util.ArrayList;
 
+import com.entrega1.jugador.Color;
+
 /**
  * @author Enrique Acedo
 
@@ -35,8 +37,8 @@ public abstract class Jugador {
 	public abstract int seleccionarFicha(ArrayList<Integer> fichas_posibles, int tirada);
 
 
-	public Jugador(Color color, int numJugador){
-		this.color = color;
+	public Jugador(Color color2, int numJugador){
+		this.color = color2;
 		fichas = new int[4];
 		turno = 0;
 		id = numJugador;

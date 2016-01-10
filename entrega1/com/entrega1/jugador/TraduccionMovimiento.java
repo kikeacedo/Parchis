@@ -3,6 +3,7 @@ package com.entrega1.jugador;
 import java.util.ArrayList;
 
 import com.entrega1.motor.Parchis;
+import com.entrega1.jugador.Color;
 
 /**
  * @author Enrique Acedo
