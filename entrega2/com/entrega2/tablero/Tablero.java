@@ -1,14 +1,13 @@
 package com.entrega2.tablero;
 
-import com.entrega1.casilla.Casilla;
-import com.entrega1.casilla.CasillaCasa;
-import com.entrega1.casilla.CasillaNormal;
-import com.entrega1.casilla.CasillaSalida;
-import com.entrega1.casilla.CasillaSeguro;
+import com.entrega2.casilla.Casilla;
+import com.entrega2.casilla.CasillaCasa;
+import com.entrega2.casilla.CasillaNormal;
+import com.entrega2.casilla.CasillaSalida;
+import com.entrega2.casilla.CasillaSeguro;
 
 /**
  * @author Enrique Acedo
-
  * @version 2.0
  * @date 10/1/2016
  *
