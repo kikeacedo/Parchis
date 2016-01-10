@@ -12,7 +12,7 @@
     </target>
  
     <target name="compila" description="Compila">
-        <javac srcdir="src/com.entrega2" destdir="bin/com.entrega2" />
+        <javac srcdir="entrega2/com/entrega2" destdir="bin/com/entrega2" />
     </target>
  
     <target name="empaqueta" depends="init" description="Empaqueta">
