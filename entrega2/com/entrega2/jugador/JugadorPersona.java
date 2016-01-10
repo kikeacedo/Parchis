@@ -8,8 +8,8 @@ import com.entrega2.jugador.Jugador;
 /**
  * @author Enrique Acedo
 
- * @version 1.0
- * @date 27/10/2015
+ * @version 2.0
+ * @date 10/1/2016
  *
  */
 

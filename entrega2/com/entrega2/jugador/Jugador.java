@@ -32,6 +32,7 @@ public abstract class Jugador {
 		this.color = color2;
 		turno = 0;
 		id = numJugador;
+		System.out.println("\tJugador "+color.name() + " ----> ID: "+ id);
 	}//constructor
 
 

@@ -1,5 +1,7 @@
 package com.entrega1.casilla;
 
+import com.entrega1.casilla.Casilla;
+
 /**
  * @author Enrique Acedo
 

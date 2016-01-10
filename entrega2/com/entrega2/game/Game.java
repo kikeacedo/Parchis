@@ -22,7 +22,7 @@ public class Game {
 	/** ATRIBUTOS **/
 	public static Scanner entrada;
 
-	
+
 	/** METODOS **/
 	public static void main(String[] args) {
 		boolean leyendo = true;
@@ -36,6 +36,7 @@ public class Game {
 						"Por favor, elija el numero de jugadores (1-4)");
 
 				num_jugadores = entrada.nextInt();
+				leyendo = false;
 
 				entrada.close();
 			}catch(Exception e){
@@ -46,12 +47,13 @@ public class Game {
 
 
 		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
-		
+
 		int num_jugadores_aux = 0;
 		for(int i= 0; i < num_jugadores; i++, num_jugadores_aux++)
 			jugadores.add(new JugadorPersona(Color.getColor(num_jugadores_aux), num_jugadores_aux));
-			
-			
+
+
+		
 
 		//		parchis.imprimirSituacion();
 

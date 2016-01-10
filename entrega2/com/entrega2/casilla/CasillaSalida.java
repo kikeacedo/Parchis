@@ -1,12 +1,11 @@
-package com.entrega1.casilla;
+package com.entrega2.casilla;
 
-import com.entrega1.casilla.Casilla;
+import com.entrega2.casilla.Casilla;
 
 /**
  * @author Enrique Acedo
-
- * @version 1.0
- * @date 27/10/2015
+ * @version 2.0
+ * @date 10/1/2016
  *
  */
 
@@ -20,16 +19,15 @@ import com.entrega1.casilla.Casilla;
  * tener que saber de que tipo es cada una
  */
 
-public class CasillaPasillo extends Casilla{
+public class CasillaSalida extends Casilla{
 
-	public CasillaPasillo(int numeroCasilla) {
+	public CasillaSalida(int numeroCasilla) {
 		super(numeroCasilla);
 	}//Constructor
 
+	@Override
 	public String tipoCasilla() {
-		return "Pasillo";
+		return "Salida";
 	}
-	
-
 
 }//class

@@ -1,5 +1,8 @@
 package com.entrega1.recorrido;
 
+import com.entrega1.casilla.Casilla;
+import com.entrega1.casilla.CasillaMeta;
+import com.entrega1.casilla.CasillaPasillo;
 import com.entrega1.casilla.*;
 
 /**

@@ -1,12 +1,11 @@
-package com.entrega1.casilla;
+package com.entrega2.casilla;
 
-import com.entrega1.casilla.Casilla;
+import com.entrega2.casilla.Casilla;
 
 /**
  * @author Enrique Acedo
-
- * @version 1.0
- * @date 27/10/2015
+ * @version 2.0
+ * @date 10/1/2016
  *
  */
 
@@ -20,16 +19,26 @@ import com.entrega1.casilla.Casilla;
  * tener que saber de que tipo es cada una
  */
 
-public class CasillaPasillo extends Casilla{
+public class CasillaMeta extends Casilla{
 
-	public CasillaPasillo(int numeroCasilla) {
+	public CasillaMeta(int numeroCasilla) {
 		super(numeroCasilla);
+		fichas = new int[4];
+		this.numeroCasilla = numeroCasilla;
 	}//Constructor
+	
+	
+	/**
+	 * @return FALSE si hay menos de 2 fichas
+	 * 		   TRUE si esta llena
+	 */
+	public boolean estaLlena(){
+		return num_fichas == 4;
+	}//estaVacia
+
 
 	public String tipoCasilla() {
-		return "Pasillo";
+		return "Meta";
 	}
-	
-
 
 }//class
