@@ -5,7 +5,7 @@ import com.entrega1.casilla.CasillaCasa;
 import com.entrega1.casilla.CasillaNormal;
 import com.entrega1.casilla.CasillaSalida;
 import com.entrega1.casilla.CasillaSeguro;
-import com.entrega2.casilla.*;
+import com.entrega1.casilla.*;
 
 /**
  * @author Enrique Acedo

@@ -5,6 +5,7 @@ import java.util.Scanner;
 import com.entrega2.jugador.Color;
 import com.entrega2.jugador.Jugador;
 import com.entrega2.jugador.JugadorPersona;
+import com.entrega2.tablero.Tablero;
 
 /**
  * @author Enrique Acedo
@@ -45,6 +46,7 @@ public class Game {
 		}//while
 
 
+		// INICIALIZO LOS JUGADORES
 		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 
 		int num_jugadores_aux = 0;
@@ -52,6 +54,9 @@ public class Game {
 			jugadores.add(new JugadorPersona(Color.getColor(num_jugadores_aux), num_jugadores_aux));
 
 
+		// INICIALIZO EL TABLERO
+		Tablero tablero = new Tablero();
+		tablero.inicializarTablero(num_jugadores);
 		
 
 		//		parchis.imprimirSituacion();
