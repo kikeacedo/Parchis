@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Parchis" default="main">
-	<javac includeantruntime="false" />
-	
+
     <target name="init">
         <tstamp />
         <property name="name" value="Prueba de Ant" />
