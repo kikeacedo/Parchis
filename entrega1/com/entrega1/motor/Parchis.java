@@ -184,6 +184,7 @@ public class Parchis {
 	}//imprimirSituacionJugadores
 
 
+	
 	/** GETTERS AND SETTERS **/
 	public static Parchis getParchis(){
 		if(miParchis == null)

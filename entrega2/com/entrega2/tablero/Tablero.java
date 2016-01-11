@@ -1,10 +1,8 @@
 package com.entrega2.tablero;
 
-import com.entrega2.casilla.Casilla;
-import com.entrega2.casilla.CasillaCasa;
-import com.entrega2.casilla.CasillaNormal;
-import com.entrega2.casilla.CasillaSalida;
-import com.entrega2.casilla.CasillaSeguro;
+import java.util.ArrayList;
+import com.entrega2.controlador.Controlador;
+import com.entrega2.jugador.Jugador;
 
 /**
  * @author Enrique Acedo
@@ -14,42 +12,90 @@ import com.entrega2.casilla.CasillaSeguro;
  */
 
 public class Tablero {
-	
-	private Casilla[] casillas;
 
-	
+	/** ATRIBUTOS */	
+	private static Controlador controller;
+	private static ArrayList<Jugador> jugadores;
+
+	/** METODOS */
+	public Tablero(ArrayList<Jugador> jugadores ){
+		Tablero.jugadores = jugadores;
+		controller = new Controlador(jugadores);
+	}//constructor
+
+
 	/**
-	 * Crea el recorrido para general teniendo en cuenta el numero de jugadores 
-	 * Siempre que sean menor que 4, se creara un recorrido de 4 jugadores (el clasico)
-	 *  
-	 * Tendran por jugador:
-	 *  4 CasillaNormal - 1 CasillaSalida - 6 CasillasNormal  
-	 *  1 CasillaSeguro - 4 CasillaNormal - 1 CasillaSeguro
-	 * 
+	 * Imprime la situacion de la partida
 	 */
-	public void inicializarTablero(int numJugadores) {
-		casillas = new Casilla[numJugadores*17 + 1];
+	public static void mostrar(){
+		int[] fichas = controller.getParchis().getFichas();
 
-		casillas[0] = new CasillaCasa(0);
+		String result = "|";
 
-		for(int i = 0; i < numJugadores; i++){
-			for(int j = 1; j <= 17;  j++){
-				switch (j) {
-				case 4:
-					casillas[i*17 + j] = new CasillaSalida(i*17 + j);
-					break;
+		for(int i = 0; i < 76; i++)
+			result += "**";
 
-				case 11:
-				case 16:
-					casillas[i*17 + j] = new CasillaSeguro(i*17 + j);
-					break;
+		result+="|\n|";
 
-				default:
-					casillas[i*17 + j] = new CasillaNormal(i*17 + j);
-					break;
-				}
-			}//for j
-		}//for i
-	}//inicializarTablero
+		for(int i = 0; i < jugadores.size(); i++){
+			if(jugadores.get(i).getColor().name().length() < 8)
+				result  += "\t JUGADOR " + jugadores.get(i).getColor().name() + " \t\t |\t";
+			else 
+				result  += "\t JUGADOR " + jugadores.get(i).getColor().name() + " \t|\t";
+		}//for
+
+		result += "\n|";
+
+		for(int i = 0; i < 76; i++)
+			result += "__";
+
+		result += "|\n|";
+
+		for(int i = 0; i < jugadores.size(); i++){
+			for(int j = 0; j < 4; j++){
+				result  += "\t Ficha "+ i +" en " + controller.getTipoCasilla(fichas[i*4+j], i) + " \t |\t";
+			}//for2
+			result +="\n|";
+		}//for1
+
+		for(int i = 0; i < 76; i++)
+			result += "__";
+
+		result += "|\n|";
+
+		for(int i = 0; i < jugadores.size(); i++){
+			if( controller.getTurno() == i)
+				result  += "\t TU TURNO --> "+ controller.getUltimaTirada()  + " \t |\t";
+			else 
+				result  += "\t\t\t\t |\t";
+		}//for
+
+		result += "\n|";
+
+		for(int i = 0; i < 76; i++)
+			result += "__";
+
+		result += "|";
+
+		System.out.println(result);
+
+	}//mostrar
+
+	/**
+	 * Pregunta al jugador que ficha mover
+	 * @param jugador
+	 * @return
+	 */
+	public static int cogerFicha(Jugador jugador){
+		return jugador.seleccionarFicha();
+	}//cogerMovimiento
+
 	
+	public void empezarJuego(){
+		controller.empezar();
+	}//empezarJuego
+	
+	/** GETTERS AND SETTERS */
+
+
 }//class

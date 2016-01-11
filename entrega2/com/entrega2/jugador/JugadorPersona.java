@@ -50,17 +50,9 @@ public class JugadorPersona extends Jugador{
 	public int seleccionarFicha() {
 		turno ++;
 		int ficha = -1;
-
-		//		TraduccionMovimiento.traducirMovimientos(fichas_posibles, fichas, tirada, color, id);
-
-		boolean leyendo = true;
-		while(leyendo){
-			Scanner entrada =new Scanner(System.in);
-			
-			ficha = entrada.nextInt();
-
-			entrada.close();
-		}//while
+		Scanner entrada =new Scanner(System.in);
+		ficha = entrada.nextInt();
+		entrada.close();
 
 		return ficha;
 	}//moverFicha

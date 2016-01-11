@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Parchis" default="main">
-	 <presetdef name="javac">
-	    <javac includeantruntime="false" />
-	  </presetdef>
+	<javac includeantruntime="false" />
 	
     <target name="init">
         <tstamp />
