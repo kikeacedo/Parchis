@@ -28,27 +28,50 @@ public class Controlador {
 	}//constructor
 
 	public void empezar(){
-		//		while(!parchis.isTerminado()){
-		Jugador jugador = gestionarTurnos();
-		
-		Tablero.mostrar();
+		Jugador jugador = null;
+		int ganador = -1;
+		while((ganador =parchis.isTerminado()) < 0){
+			// Cojo el jugador
+			jugador = gestionarTurnos();
 
-		boolean puedeMover = false;
-		int intentos = 0;
-		while(!puedeMover && intentos < 5){
-			int ficha_a_mover = Tablero.cogerFicha(jugador);
+			// Tira y si es 6 y todas estan fuera, se suma 1
+			int tirada = jugador.tirarDado();
 
-			if(parchis.puedeMover(jugador, ficha_a_mover)){
-				moverFicha(jugador, ficha_a_mover);
-				puedeMover = true;
-			}else{
-				intentos++;
-				System.out.println("Esa ficha no se puede mover, elige otra por favor");
-			}//if-else
-		}//while
-		//		}//while		
-		
-		
+			if(tirada == 6 && Parchis.fichasEnJuego(jugador) == 4)
+				tirada = 7;
+
+			// Guardo la tirada
+			tiradas.add(tirada);
+
+			// Muestro estado de tablero
+			Tablero.mostrar();
+
+			// Cojo eleccion del jugador y muevo ficha o paso turno si no puede
+			boolean puedeMover = false;
+			int intentos = 0;
+			boolean pasa = false;
+			while(!puedeMover && intentos < 5 && !pasa) {
+				int ficha_a_mover = Tablero.cogerFicha(jugador);
+				if(ficha_a_mover > 4)
+					pasa = true;
+
+				if(!pasa){
+					if(parchis.puedeMover(jugador, ficha_a_mover, tirada)){
+						parchis.moverFicha(jugador, ficha_a_mover, tirada);
+						puedeMover = true;
+					}else{
+						intentos++;
+						System.out.println("Esa ficha no se puede mover, elige otra por favor");
+						if(intentos == 5)
+							System.out.println("NO PUEDES MOVER, PIERDES TURNO");
+					}//if-else
+				}else{
+					System.out.println("Jugador " + jugador.getColor().name() + " ha pasado");
+				}//if-else
+			}//while
+		}//while		
+
+		System.out.println("ENHORABUENA JUGADOR " + jugadores.get(ganador).getColor().name());
 	}//empezar
 
 	/**
@@ -57,32 +80,26 @@ public class Controlador {
 	 * @return jugador que tiene el turno
 	 */
 	public Jugador gestionarTurnos(){
+
+		if(!tiradas.isEmpty()){
+			int ultima_tirada = tiradas.get(tiradas.size()-1);
+
+			if((ultima_tirada != 6 && ultima_tirada != 7) || tiradas.size() == 3){
+				tiradas.clear();
+				turno++;
+			}//if
+
+			if(turno >= 4)
+				turno = 0;
+
+		}//if
+
 		Jugador jugador = jugadores.get(turno);
 
-		int tirada = jugador.tirarDado();
-		
-		if(tirada == 6 && parchis.todasEnJuego(jugador))
-			tirada = 7;
-		
-		tiradas.add(tirada);
-		
-		if((tirada != 6 && tirada != 7) || tiradas.size() == 3){
-			tiradas.clear();
-			turno++;
-		}//if
-		
-		if(turno >= 4)
-			turno = 0;
-		
 		return jugador;
 	}//gestionarTurnos
 
 
-	public boolean moverFicha(Jugador jugador, int ficha){
-
-
-		return true;
-	}//moverFicha
 
 	public boolean notificarMovimiento(Jugador jugador, Ficha ficha, int tirada){
 
@@ -91,24 +108,25 @@ public class Controlador {
 	}//notificarMovimiento
 
 
-	public String getTipoCasilla(int casilla,int id_jugador){
+	public static String getTipoCasilla(int casilla,int id_jugador){
 		String tipoCasilla = "";
 
 		if(casilla == 76)
 			tipoCasilla = "META!!";
-		else if(5+(id_jugador*17) == casilla)
-			tipoCasilla = "Salida";
-		else
-			if(casilla<17*4 ){
+		else 
+			try{
 				tipoCasilla = parchis.getRecorrido().getCasillas()[casilla].tipoCasilla();
-			}else{
-				tipoCasilla = "Casilla Pasillo";
-			}//if-else
+			}catch(ArrayIndexOutOfBoundsException e){
+				tipoCasilla = parchis.getRecorridoColor().getCasillas()[casilla-69].tipoCasilla();
 
-		if(tipoCasilla != "Casa" && tipoCasilla != "Salida" && tipoCasilla != "META!!"){
+			}//try-catch
+
+		if(tipoCasilla != "Casa"  && tipoCasilla != "META!!"){
 			if(tipoCasilla == "Casilla Pasillo")
 				tipoCasilla += "_"+(casilla-(4*17));
-			else
+			else if(tipoCasilla == "Salida"){
+				tipoCasilla += " " + parchis.getRecorrido().getColor(casilla);
+			}else
 				tipoCasilla += "_"+casilla;
 		}
 

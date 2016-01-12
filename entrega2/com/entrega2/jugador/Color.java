@@ -12,7 +12,7 @@ import com.entrega2.jugador.Color;
 
 public enum Color {
 	
-	Rojo, Azul, Amarillo, Verde;
+	AMARILLO, AZUL, ROJO, VERDE;
 	
 	
 	/**

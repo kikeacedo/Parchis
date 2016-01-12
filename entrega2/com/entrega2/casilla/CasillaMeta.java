@@ -23,22 +23,14 @@ public class CasillaMeta extends Casilla{
 
 	public CasillaMeta(int numeroCasilla) {
 		super(numeroCasilla);
-		fichas = new int[4];
+		fichas = new int[16];
+		for(int i = 0; i < fichas.length; i++)
+			fichas[i] = -1;
 		this.numeroCasilla = numeroCasilla;
 	}//Constructor
-	
-	
-	/**
-	 * @return FALSE si hay menos de 2 fichas
-	 * 		   TRUE si esta llena
-	 */
-	public boolean estaLlena(){
-		return num_fichas == 4;
-	}//estaVacia
 
 
 	public String tipoCasilla() {
 		return "Meta";
 	}
-
 }//class

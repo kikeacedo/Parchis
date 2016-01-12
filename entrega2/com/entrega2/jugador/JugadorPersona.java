@@ -20,9 +20,14 @@ import com.entrega2.jugador.Jugador;
 
 public class JugadorPersona extends Jugador{
 
+	/** ATRIBUTOS */
+	Scanner entrada;
+	
 	/** METODOS **/
 	public JugadorPersona(Color color, int numJugador) {
 		super(color, numJugador);
+		entrada =new Scanner(System.in);
+
 	}//Constructor
 
 	//	/**
@@ -50,9 +55,8 @@ public class JugadorPersona extends Jugador{
 	public int seleccionarFicha() {
 		turno ++;
 		int ficha = -1;
-		Scanner entrada =new Scanner(System.in);
+		entrada =new Scanner(System.in);
 		ficha = entrada.nextInt();
-		entrada.close();
 
 		return ficha;
 	}//moverFicha

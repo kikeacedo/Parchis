@@ -24,6 +24,9 @@ public class CasillaPasillo extends Casilla{
 
 	public CasillaPasillo(int numeroCasilla) {
 		super(numeroCasilla);
+		fichas = new int[16];
+		for(int i = 0; i < fichas.length; i++)
+			fichas[i] = -1;
 	}//Constructor
 
 	public String tipoCasilla() {

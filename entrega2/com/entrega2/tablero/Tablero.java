@@ -53,7 +53,11 @@ public class Tablero {
 
 		for(int i = 0; i < jugadores.size(); i++){
 			for(int j = 0; j < 4; j++){
-				result  += "\t Ficha "+ i +" en " + controller.getTipoCasilla(fichas[i*4+j], i) + " \t |\t";
+				if(Controlador.getTipoCasilla(fichas[j*4+i], i).length() < 10)
+					result  += " Ficha "+ i +" en " + Controlador.getTipoCasilla(fichas[j*4+i], i) + " \t\t |\t";
+				else
+					result  += " Ficha "+ i +" en " + Controlador.getTipoCasilla(fichas[j*4+i], i) + " \t |\t";
+
 			}//for2
 			result +="\n|";
 		}//for1
@@ -90,11 +94,11 @@ public class Tablero {
 		return jugador.seleccionarFicha();
 	}//cogerMovimiento
 
-	
+
 	public void empezarJuego(){
 		controller.empezar();
 	}//empezarJuego
-	
+
 	/** GETTERS AND SETTERS */
 
 

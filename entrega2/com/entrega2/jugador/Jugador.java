@@ -34,10 +34,20 @@ public abstract class Jugador {
 		//System.out.println("\tJugador "+color.name() + " ----> ID: "+ id);
 	}//constructor
 
+	public int primeraCasilla(Jugador jugador){		
+		return 17*jugador.getId() + 5;
+	}//primeraCasilla
+	
+	public int ultimaCasilla(Jugador jugador){		
+		return (jugador.getId()==0) ? 68 : jugador.getId()*17;
+	}//primeraCasilla
+	
 
 	public int tirarDado(){
 		return 	Dado.tirarDado();
 	}//tirarDado
+	
+	public void comentarios(){
 	//	/**
 	//	 * Si NO HAY fichas en juego:
 	//	 *  - comprueba que se pueda sacar ficha
@@ -127,7 +137,8 @@ public abstract class Jugador {
 	//
 	//	}//fichasEnTablero
 
-
+	}
+	
 	/** GETTERS AND SETTERS **/
 	public Color getColor() {
 		return color;
@@ -137,6 +148,7 @@ public abstract class Jugador {
 		this.color = color;
 	}
 
+	public void comentarios2(){
 	//	public int[] getFichas() {
 	//		return fichas;
 	//	}
@@ -168,6 +180,8 @@ public abstract class Jugador {
 	//	public void setCasillaFinalColor(int casillaFinalColor) {
 	//		this.casillaFinalColor = casillaFinalColor;
 	//	}
+	}
+	
 	public int getId() {
 		return id;
 	}

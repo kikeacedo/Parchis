@@ -21,7 +21,6 @@ public abstract class Casilla {
 	/** ATRIBUTOS **/
 	
 	protected int[] fichas;
-	protected int num_fichas;
 	protected int numeroCasilla;
 	
 	/** METODOS **/
@@ -30,6 +29,8 @@ public abstract class Casilla {
 	
 	public Casilla(int numeroCasilla){
 		fichas = new int[2];
+		fichas[0] = -1;
+		fichas[1] = -1;
 		this.numeroCasilla = numeroCasilla;
 	}//constructor
 	
@@ -38,15 +39,15 @@ public abstract class Casilla {
 	 * 		   TRUE si esta vacia
 	 */
 	public boolean estaVacia(){
-		return num_fichas == 0;
+		return (fichas[0] == -1 && fichas[1] == -1);
 	}//estaVacia
-	
+
 	/**
 	 * @return FALSE si hay menos de 2 fichas
 	 * 		   TRUE si esta llena
 	 */
 	public boolean estaLlena(){
-		return num_fichas == 2;
+		return (fichas[0] != -1 && fichas[1] != -1);
 	}//estaVacia
 	
 	
@@ -62,7 +63,6 @@ public abstract class Casilla {
 			if(fichas[i] < 0){
 				fichas[i] = jugador;
 				metida = true;
-				num_fichas++;
 			}//if
 		}//for
 		
@@ -82,7 +82,6 @@ public abstract class Casilla {
 			if(fichas[i] == jugador){
 				fichas[i] = -1;
 				sacada = true;
-				num_fichas--;
 			}//if
 		}//for
 		return sacada;
@@ -104,5 +103,9 @@ public abstract class Casilla {
 		
 		return ficha;
 	}//getFicha
+	
+	public int[] getFichas(){
+		return fichas;
+	}
 	
 }//class
