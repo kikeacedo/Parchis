@@ -28,24 +28,6 @@ public class Game {
 	public static void main(String[] args) {
 		final int NUM_JUGADORES = 4;
 
-
-//		while(leyendo){
-//			try{
-//				entrada =new Scanner(System.in);
-//				System.out.println("Bienvenido al PARCHIS\n" + 
-//						"Por favor, elija el numero de jugadores (1-4)");
-//
-//				num_jugadores = entrada.nextInt();
-//				leyendo = false;
-//
-//				entrada.close();
-//			}catch(Exception e){
-//				System.out.println("Error, empieza una nueva partida");
-//				entrada.close();
-//			}//try
-//		}//while
-
-
 		// INICIALIZO LOS JUGADORES
 		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 
@@ -56,9 +38,6 @@ public class Game {
 		// INICIALIZO EL TABLERO
 		Tablero tablero = new Tablero(jugadores);
 		tablero.empezarJuego();
-		
-//		tablero.mostrar();
-		//		parchis.imprimirSituacion();
 
 	}//main
 }//class

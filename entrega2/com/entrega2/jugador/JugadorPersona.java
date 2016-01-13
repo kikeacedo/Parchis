@@ -7,7 +7,6 @@ import com.entrega2.jugador.Jugador;
 
 /**
  * @author Enrique Acedo
-
  * @version 2.0
  * @date 10/1/2016
  *
@@ -30,21 +29,6 @@ public class JugadorPersona extends Jugador{
 
 	}//Constructor
 
-	//	/**
-	//	 * Metodo que mueve la ficha N casillas
-	//	 */
-	//	public void moverFicha(int numero_ficha, int tirada){
-	//		
-	//		fichas[numero_ficha] = fichas[numero_ficha] + tirada;
-	//		// Si mete en meta la ficha, pone la variable a true;
-	//		if(fichas[numero_ficha] == casillaFinalColor)
-	//			Juez.setMeteFichaEnCasa(true);
-	//		
-	//		System.out.println("\tFicha " + numero_ficha + " movida a " + TraduccionMovimiento.getTipoCasilla(fichas[numero_ficha], id));
-	//		System.out.println("-----------------------------------");
-	//
-	//	}//moverFicha
-
 	/**
 	 * Muestra por pantalla las opciones que hay
 	 * Devuelve la ficha que ha elegido el usuario
@@ -60,6 +44,5 @@ public class JugadorPersona extends Jugador{
 
 		return ficha;
 	}//moverFicha
-
 
 }//class

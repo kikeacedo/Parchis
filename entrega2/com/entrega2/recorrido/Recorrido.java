@@ -29,9 +29,12 @@ public abstract class Recorrido {
 	 }//getRecorrido
 	 
 	 public abstract void inicializarRecorrido(int numJugadores);
-//	 public abstract boolean meterFicha(int num_jugador, int num_casilla);
-//	 public abstract boolean sacarFicha(int num_jugador, int num_casilla);
 	 
+	 /**
+	  * Devuelve el color de la casilla segun el numero
+	  * @param numero_casilla
+	  * @return Color
+	  */
 	 public String getColor(int numero_casilla){
 			String color;
 			
@@ -44,7 +47,7 @@ public abstract class Recorrido {
 			else
 				color = "Amarillo";
 			return color;	
-		}
+		}//getColor
 
 	
 }//class

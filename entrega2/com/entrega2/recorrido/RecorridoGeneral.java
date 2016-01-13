@@ -60,7 +60,6 @@ public class RecorridoGeneral extends Recorrido{
 				}//switch
 			}//for j
 		}//for i
-
 	}//inicializarRecorrido
 
 }//class

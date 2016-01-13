@@ -36,31 +36,4 @@ public class RecorridoColor extends Recorrido{
 
 	}//inicializarRecorrido
 
-//	/**
-//	 * Metodo que mete la ficha del jugador num_jugador en la casilla num_casilla
-//	 * @param num_jugador numero de jugador que va a mover la ficha
-//	 * @param num_casilla numero de casilla a la que mover la ficha
-//	 */
-//	public boolean meterFicha(int num_jugador, int num_casilla) {
-//		boolean metida = false;
-//		Casilla casilla = casillas[num_casilla];
-//		if(!casilla.estaLlena()){
-//			//Meto esta ficha
-//			casilla.meterFicha(num_jugador);
-//			metida = true;
-//
-//		}//if
-//
-//		return metida;	
-//	}//meterFicha
-//
-//	/**
-//	 * Metodo que saca la ficha del jugador num_jugador de la casilla num_casilla
-//	 * @param num_jugador numero de jugador que va a sacar la ficha
-//	 * @param num_casilla numero de casilla de la que sacar la ficha
-//	 */
-//	public boolean sacarFicha(int num_jugador, int num_casilla) {
-//		return casillas[num_casilla].sacarFicha(num_jugador);
-//	}//sacarFicha
-
 }//class

@@ -13,7 +13,6 @@ import com.entrega2.recorrido.*;
  *
  */
 
-
 public class Parchis {
 
 	/** ATRIBUTOS */
@@ -34,7 +33,10 @@ public class Parchis {
 		iniciarFichas(numJugadores);
 	}//constructor
 
-
+	/**
+	 * Inicia las fichas segun el numero de jugadores de la partida
+	 * @param numJugadores
+	 */
 	private void iniciarFichas(int numJugadores){
 
 		fichas = new int[numJugadores*4];
@@ -45,6 +47,11 @@ public class Parchis {
 
 	}//iniciarFichas
 
+	/**
+	 * 
+	 * @return TRUE si la partida se ha termiando
+	 * @return FALSE en caso de que no haya ganado nadie
+	 */
 	public int isTerminado(){
 		boolean terminado = false;
 		int ganador = -1;
@@ -65,10 +72,23 @@ public class Parchis {
 		return ganador;
 	}//isTerminado
 
+	/**
+	 * 
+	 * @param jugador
+	 * @param ficha
+	 * @param tirada
+	 * @return TRUE si puede mover jugador la ficha con la tirada
+	 * @return FALSE en caso contrario
+	 */
 	public boolean puedeMover(Jugador jugador, int ficha, int tirada){
 		return verOpciones(jugador, tirada).contains(ficha);
 	}//puedeMover
 
+	/**
+	 * 
+	 * @param jugador
+	 * @return numero de fichas fuera de casa de jugador
+	 */
 	public static int fichasEnJuego(Jugador jugador){
 		int fichas_en_juego = 0;
 
@@ -81,6 +101,11 @@ public class Parchis {
 		return fichas_en_juego;
 	}//todasEnJuego
 
+	/**
+	 * 
+	 * @param jugador
+	 * @return array con la posicion de las fichas de jugador
+	 */
 	public static int[] fichasJugador(Jugador jugador){
 		int[] fichas_jugador = new int[4];
 
@@ -91,6 +116,12 @@ public class Parchis {
 		return fichas_jugador;
 	}//fichasJugador
 
+	/**
+	 * 
+	 * @param jugador
+	 * @return TRUE si jugador puede sacar ficha de casa
+	 * @return FALSE en caso contrario
+	 */
 	public static boolean sacarFicha(Jugador jugador){
 		boolean puede_sacar = true;
 
@@ -107,6 +138,12 @@ public class Parchis {
 		return puede_sacar;
 	}//sacarFicha
 
+	/**
+	 * 
+	 * @param jugadorActual
+	 * @param tiradaActual
+	 * @return ArrayList con las fichas que puede mover
+	 */
 	public ArrayList<Integer> verOpciones(Jugador jugadorActual, int tiradaActual) {
 		int[] fichas = fichasJugador(jugadorActual);
 		ArrayList<Integer> opciones = new ArrayList<Integer>();
@@ -144,6 +181,14 @@ public class Parchis {
 		return opciones;
 	}//verOpciones
 
+	/**
+	 * Realiza el movimiento y devuelve el movimiento adicional 
+	 * que pueda darse por comer una ficha o meter una ficha en casa
+	 * @param jugador
+	 * @param ficha
+	 * @param tirada
+	 * @return movimiento adicional
+	 */
 	public int moverFicha(Jugador jugador, int ficha, int tirada){
 
 		int suma = 0;
@@ -201,6 +246,12 @@ public class Parchis {
 		return suma;
 	}//moverFicha
 
+	/**
+	 * Calcula el numero de la ficha seguna la casilla y el jugador
+	 * @param id_jugador
+	 * @param numero_casilla
+	 * @return numero de ficha
+	 */
 	public static int numeroFicha(int id_jugador, int numero_casilla){
 		int ficha = -1;
 
@@ -213,7 +264,6 @@ public class Parchis {
 	}//numeroFicha
 
 	/** GETTERS AND SETTERS */
-
 	public Recorrido getRecorrido(){
 		return recorrido_general;
 	}
@@ -225,6 +275,5 @@ public class Parchis {
 	public int[] getFichas(){
 		return fichas;
 	}
-
 
 }//class
