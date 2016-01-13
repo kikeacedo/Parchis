@@ -30,8 +30,8 @@ public class Dado {
 	 * @return numero aleatorio entre 1 y num_caras
 	 */
 	public static int tirarDado(){
-		return 5;
-		//return (int) (Math.random()*NUM_CARAS+1);
+//		return 5;
+		return (int) (Math.random()*NUM_CARAS+1);
 	}//tirar dado
 	
 	

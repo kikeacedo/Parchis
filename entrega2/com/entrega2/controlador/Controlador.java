@@ -1,10 +1,8 @@
 package com.entrega2.controlador;
 
 import java.util.ArrayList;
-
 import com.entrega2.jugador.Jugador;
 import com.entrega2.motor.Parchis;
-import com.entrega2.tablero.Ficha;
 import com.entrega2.tablero.Tablero;
 
 /**
@@ -43,32 +41,8 @@ public class Controlador {
 			// Guardo la tirada
 			tiradas.add(tirada);
 
-			// Muestro estado de tablero
-			Tablero.mostrar();
-
-			// Cojo eleccion del jugador y muevo ficha o paso turno si no puede
-			boolean puedeMover = false;
-			int intentos = 0;
-			boolean pasa = false;
-			while(!puedeMover && intentos < 5 && !pasa) {
-				int ficha_a_mover = Tablero.cogerFicha(jugador);
-				if(ficha_a_mover > 4)
-					pasa = true;
-
-				if(!pasa){
-					if(parchis.puedeMover(jugador, ficha_a_mover, tirada)){
-						parchis.moverFicha(jugador, ficha_a_mover, tirada);
-						puedeMover = true;
-					}else{
-						intentos++;
-						System.out.println("Esa ficha no se puede mover, elige otra por favor");
-						if(intentos == 5)
-							System.out.println("NO PUEDES MOVER, PIERDES TURNO");
-					}//if-else
-				}else{
-					System.out.println("Jugador " + jugador.getColor().name() + " ha pasado");
-				}//if-else
-			}//while
+			// Realizo la accion de mover
+			accionMover(jugador, tirada);
 		}//while		
 
 		System.out.println("ENHORABUENA JUGADOR " + jugadores.get(ganador).getColor().name());
@@ -99,13 +73,38 @@ public class Controlador {
 		return jugador;
 	}//gestionarTurnos
 
+	private void accionMover(Jugador jugador, int tirada){
+		// Muestro estado de tablero
+		Tablero.mostrar();
+		tiradas.remove(tiradas.size()-1);
+		// Cojo eleccion del jugador y muevo ficha o paso turno si no puede
+		boolean puedeMover = false;
+		int intentos = 0;
+		boolean pasa = false;
+		while(!puedeMover && intentos < 5 && !pasa) {
+			int ficha_a_mover = Tablero.cogerFicha(jugador);
+			if(ficha_a_mover > 4)
+				pasa = true;
 
+			if(!pasa){
+				if(parchis.puedeMover(jugador, ficha_a_mover, tirada)){
+					int tirada_adicional = 0;
+					if((tirada_adicional = parchis.moverFicha(jugador, ficha_a_mover, tirada)) > 0)
+						tiradas.add(tirada_adicional);
+						accionMover(jugador, tirada_adicional);
 
-	public boolean notificarMovimiento(Jugador jugador, Ficha ficha, int tirada){
-
-
-		return true;
-	}//notificarMovimiento
+					puedeMover = true;
+				}else{
+					intentos++;
+					System.out.println("Esa ficha no se puede mover, elige otra por favor");
+					if(intentos == 5)
+						System.out.println("NO PUEDES MOVER, PIERDES TURNO");
+				}//if-else
+			}else{
+				System.out.println("Jugador " + jugador.getColor().name() + " ha pasado");
+			}//if-else
+		}//while
+	}//accionMover
 
 
 	public static String getTipoCasilla(int casilla,int id_jugador){

@@ -137,9 +137,9 @@ public class Parchis {
 					if(!hayPuente)
 						opciones.add(i);
 				}else if(fichas[i] + tiradaActual <= 76) 
-						opciones.add(i);
+					opciones.add(i);
 			}//for
-		}
+		}//if-else
 
 		return opciones;
 	}//verOpciones
@@ -168,6 +168,8 @@ public class Parchis {
 			recorrido_general.getCasillas()[numero_casilla_actual].sacarFicha(jugador.getId());
 			recorrido_color.getCasillas()[numero_casilla_nueva - 69].meterFicha(jugador.getId());
 			fichas[jugador.getId() * 4 + ficha] = numero_casilla_nueva;
+			if(numero_casilla_nueva == 76)
+				suma = 10;
 
 		}else{
 			int ficha_comida = -1;
@@ -187,7 +189,7 @@ public class Parchis {
 			// Si he comido ficha
 			if(ficha_comida > -1 && ficha_comida != jugador.getId() && casilla_nueva.tipoCasilla() == "Normal"){
 				// Sumo 20
-				suma += 20;
+				suma = 20;
 
 				// Mando la ficha a casa
 				casilla_nueva.sacarFicha(ficha_comida);
@@ -215,7 +217,7 @@ public class Parchis {
 	public Recorrido getRecorrido(){
 		return recorrido_general;
 	}
-	
+
 	public Recorrido getRecorridoColor(){
 		return recorrido_color;
 	}
