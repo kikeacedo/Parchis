@@ -8,16 +8,21 @@ import com.entrega2.tablero.Tablero;
 /**
  * @author Enrique Acedo
  * @version 2.0
- * @date 10/1/2016
+ * @date 12/1/2016
  *
  */
 
 public class Controlador {
 
+	/** ATRIBUTOS */
+
 	private static Parchis parchis;
 	private ArrayList<Jugador> jugadores;
 	private static int turno = 0;
 	private static ArrayList<Integer> tiradas;
+
+
+	/** METODOS */
 
 	public Controlador(ArrayList<Jugador> jugadores){
 		this.jugadores = jugadores;
@@ -25,6 +30,9 @@ public class Controlador {
 		tiradas = new ArrayList<Integer>();
 	}//constructor
 
+	/**
+	 * Empieza la partid
+	 */
 	public void empezar(){
 		Jugador jugador = null;
 		int ganador = -1;
@@ -73,6 +81,11 @@ public class Controlador {
 		return jugador;
 	}//gestionarTurnos
 
+	/**
+	 * Realiza la accion de mover ficha 
+	 * @param jugador
+	 * @param tirada
+	 */
 	private void accionMover(Jugador jugador, int tirada){
 		// Muestro estado de tablero
 		Tablero.mostrar();
@@ -91,7 +104,7 @@ public class Controlador {
 					int tirada_adicional = 0;
 					if((tirada_adicional = parchis.moverFicha(jugador, ficha_a_mover, tirada)) > 0)
 						tiradas.add(tirada_adicional);
-						accionMover(jugador, tirada_adicional);
+					accionMover(jugador, tirada_adicional);
 
 					puedeMover = true;
 				}else{
@@ -106,7 +119,12 @@ public class Controlador {
 		}//while
 	}//accionMover
 
-
+	/**
+	 * Devuelve el tipo de casilla
+	 * @param casilla
+	 * @param id_jugador
+	 * @return
+	 */
 	public static String getTipoCasilla(int casilla,int id_jugador){
 		String tipoCasilla = "";
 
