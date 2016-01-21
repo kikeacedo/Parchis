@@ -22,6 +22,8 @@ public abstract class Jugador {
 	protected int id;
 	protected Color color;
 	protected int turno;
+	protected String nombre;
+
 
 	/** METODOS**/
 	public abstract int seleccionarFicha();
@@ -73,6 +75,14 @@ public abstract class Jugador {
 
 	public int getId() {
 		return id;
+	}
+	
+	public void setNombre(String nombre){
+		this.nombre = nombre;
+	}
+	
+	public String getNombre(){
+		return nombre;
 	}
 
 }//class

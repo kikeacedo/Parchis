@@ -37,6 +37,9 @@ public class Game {
 
 		// INICIALIZO EL TABLERO
 		Tablero tablero = new Tablero(jugadores);
+		
+		tablero.bienvenida();
+		tablero.nombrarJugadores();
 		tablero.empezarJuego();
 
 	}//main

@@ -40,9 +40,13 @@ public class JugadorPersona extends Jugador{
 		turno ++;
 		int ficha = -1;
 		entrada =new Scanner(System.in);
-		ficha = entrada.nextInt();
+		ficha = entrada.nextInt() - 1;
 
+		if(ficha == -1)
+			ficha = 9;
+		
 		return ficha;
 	}//moverFicha
+	
 
 }//class

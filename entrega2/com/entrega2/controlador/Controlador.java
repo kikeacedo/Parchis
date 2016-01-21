@@ -20,6 +20,7 @@ public class Controlador {
 	private ArrayList<Jugador> jugadores;
 	private static int turno = 0;
 	private static ArrayList<Integer> tiradas;
+	private static boolean repite = false;
 
 
 	/** METODOS */
@@ -89,7 +90,11 @@ public class Controlador {
 	private void accionMover(Jugador jugador, int tirada){
 		// Muestro estado de tablero
 		Tablero.mostrar();
-		tiradas.remove(tiradas.size()-1);
+
+		if(repite){
+			tiradas.remove(tiradas.size()-1);
+			repite = false;
+		}
 		// Cojo eleccion del jugador y muevo ficha o paso turno si no puede
 		boolean puedeMover = false;
 		int intentos = 0;
@@ -102,9 +107,12 @@ public class Controlador {
 			if(!pasa){
 				if(parchis.puedeMover(jugador, ficha_a_mover, tirada)){
 					int tirada_adicional = 0;
-					if((tirada_adicional = parchis.moverFicha(jugador, ficha_a_mover, tirada)) > 0)
+					if((tirada_adicional = parchis.moverFicha(jugador, ficha_a_mover, tirada)) > 0){
 						tiradas.add(tirada_adicional);
-					accionMover(jugador, tirada_adicional);
+						repite = true;
+						accionMover(jugador, tirada_adicional);
+					}
+
 
 					puedeMover = true;
 				}else{
@@ -163,5 +171,22 @@ public class Controlador {
 	public int getUltimaTirada(){
 		return tiradas.get(tiradas.size()-1);
 	}//getUltimaTirada
+
+	public String getReglas(){
+		String result= "";
+
+		result += "************************ REGLAS DEL JUEGO  ************************\n";
+		result += "| Puede ver las reglas del juego en el siguiente enlace:	         |\n";
+		result += "| https://es.wikipedia.org/wiki/Parch%C3%ADs                      |\n";
+		result += "*******************************************************************\n";
+
+		return result;
+	}//getReglas
+
+	public void nombrarJugadores(String[] nombres) {
+		for(int i = 0; i < nombres.length; i++){
+			jugadores.get(i).setNombre(nombres[i]);
+		}//for
+	}//nombrarJugadores
 
 }//class
