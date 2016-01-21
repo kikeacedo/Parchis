@@ -101,9 +101,15 @@ public class Controlador {
 		boolean pasa = false;
 		while(!puedeMover && intentos < 5 && !pasa) {
 			int ficha_a_mover = Tablero.cogerFicha(jugador);
-			if(ficha_a_mover > 4)
+			if(ficha_a_mover > 3)
 				pasa = true;
+			
+			if(ficha_a_mover == 9){
+				System.out.println("\n MUCHAS GRACIAS POR JUGAR AL PARCHIS!!!");
+				System.out.println("\n HASTA OTRA!!!");
 
+				System.exit(1);
+			}
 			if(!pasa){
 				if(parchis.puedeMover(jugador, ficha_a_mover, tirada)){
 					int tirada_adicional = 0;

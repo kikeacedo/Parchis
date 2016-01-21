@@ -157,7 +157,11 @@ public class Tablero {
 		result += "|                                                                 |\n";
 		result += "| En caso de seleccionar una ficha que no pueda moverse, se no-   |\n";
 		result += "| tificará mediante un mensaje y se dará opcion de seleccionar    |\n";
-		result += "| otra ficha.                                                     |\n";
+		result += "|                                                                 |\n";
+		result += "| Si seleccionas un numero que no corresponda a una ficha, pasará |\n";
+		result += "| turno.                                                          |\n";
+		result += "|                                                                 |\n";
+		result += "| Si pulsas el 0 se terminará la partida                          |\n";
 		result += "*******************************************************************\n";
 
 		return result;
